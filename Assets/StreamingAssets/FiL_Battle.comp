@@ -5,5 +5,4 @@ topics:
   in: true
 - name: Boxes
   comet: Box
-  in: true
   out: true
