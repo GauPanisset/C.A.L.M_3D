@@ -1,0 +1,10 @@
+[ERR]	BadParameter: Topic NewPlatform is not included in your .comp files
+			D:\dev\satellite-library\src\nebula\NebulaHandler.cpp:12 in addTopic()
+[ERR]	BadParameter: Topic NewPlatform is not included in your .comp files
+			D:\dev\satellite-library\src\nebula\NebulaHandler.cpp:12 in addTopic()
+[ERR]	BadParameter: Topic NewPlatform is not included in your .comp files
+			D:\dev\satellite-library\src\nebula\NebulaHandler.cpp:12 in addTopic()
+[ERR]	BadParameter: Topic NewPlatform is not included in your .comp files
+			D:\dev\satellite-library\src\nebula\NebulaHandler.cpp:12 in addTopic()
+[ERR]	NetworkException: Can't notify Component 'FiL_Battle' state change: Session connection not found
+			D:\dev\satellite-library\src\adapter\session\ConnectionHandler.cpp:53 in notifyStateChange()
