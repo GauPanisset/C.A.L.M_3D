@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
 	private Animator animator1;
 	private Rigidbody rigidBody2;
 	private Animator animator2;
+    private RageManager ragemanager;
 
     public float maxSpeed = 5.0f;
     private bool facingRight1 = false;
@@ -30,6 +31,8 @@ public class PlayerController : MonoBehaviour {
 
 		sprite1 = player1.GetComponentInChildren<SpriteRenderer> ();
 		sprite2 = player2.GetComponentInChildren<SpriteRenderer> ();
+
+        ragemanager = GameObject.Find("GlobalScript").GetComponent<RageManager>();
 	}
 	
 	// Update is called once per frame
@@ -55,14 +58,17 @@ public class PlayerController : MonoBehaviour {
 
 		if (Input.GetAxis ("Fire1_P1") > 0) {
 			Fire ();
-			if (distance < 1.0f && Mathf.Abs (direction1) > 0.9f) {
+			if (distance < 3.0f && Mathf.Abs (direction1) > 0.9f) {
+                ragemanager.AddRage(10f, 2);
 				Debug.Log ("Hit !");
 			}
 		}
 		if (Input.GetAxis ("Fire1_P2") > 0) {
 			Fire ();
-			if (distance < 1.0f && Mathf.Abs (direction2) > 0.9f) {
-				Debug.Log ("Hit !");
+			if (distance < 3.0f && Mathf.Abs (direction2) > 0.9f)
+            {
+                ragemanager.AddRage(10f, 1);
+                Debug.Log ("Hit !");
 			}
 		}
     }
