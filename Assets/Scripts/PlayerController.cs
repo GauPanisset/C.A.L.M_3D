@@ -50,18 +50,18 @@ public class PlayerController : MonoBehaviour {
 		MovePlayer (h2, v2, 2);
 
 		float distance = Vector3.Distance (player1.transform.position, player2.transform.position);
-		float direction1 = Vector3.Dot ((player2.transform.position - player1.transform.position).normalized, new Vector3(h1, v1, 0).normalized);
-		float direction2 = Vector3.Dot ((player1.transform.position - player2.transform.position).normalized, new Vector3(h2, v2, 0).normalized);
+		float direction1 = Vector3.Dot ((player2.transform.position - player1.transform.position).normalized, new Vector3(h1, 0, v1).normalized);
+		float direction2 = Vector3.Dot ((player1.transform.position - player2.transform.position).normalized, new Vector3(h2, 0, v2).normalized);
 
 		if (Input.GetAxis ("Fire1_P1") > 0) {
 			Fire ();
-			if (distance < 1.0f && Mathf.Abs (direction1) > 0.9f) {
+			if (distance < 3.0f && Mathf.Abs (direction1) > 0.9f) {
 				Debug.Log ("Hit !");
 			}
 		}
 		if (Input.GetAxis ("Fire1_P2") > 0) {
 			Fire ();
-			if (distance < 1.0f && Mathf.Abs (direction2) > 0.9f) {
+			if (distance < 3.0f && Mathf.Abs (direction2) > 0.9f) {
 				Debug.Log ("Hit !");
 			}
 		}
@@ -159,6 +159,4 @@ public class PlayerController : MonoBehaviour {
 
 	private void Fire(){
 	}
-
-
 }
