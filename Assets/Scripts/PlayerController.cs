@@ -6,8 +6,16 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody m_RigidBody;
 	private Animator m_Animator;
+	private WeaponOnPlayer[] weapon = new WeaponOnPlayer[2];
+	private DataController dataController = new DataController ();
+
+	private int actualWeapon = 0;
+	private float nextFire;
 
     public float maxSpeed = 5.0f;
+	public Shot shot;
+	public WeaponGround weaponGround;
+
     private bool facingRight = false;
     private bool facingDown = true;
 
@@ -15,11 +23,35 @@ public class PlayerController : MonoBehaviour {
     void Start () {
         m_RigidBody = GetComponent<Rigidbody>();
 		m_Animator = GetComponentInChildren<Animator> ();
+
+		for (int i=0;i<2;i++){
+			weapon [i] = dataController.SearchID(0);
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetButton("Fire_P1"))
+		{
+			int h = (int) Input.GetAxis ("Horizontal");
+			int v = (int) Input.GetAxis ("Vertical");
+			if (h == 0 && v == 0) {
+				v = -1;
+			}
+			Fire (h,v);
+		}
+		if (Input.GetButtonDown("Switch"))
+		{
+			Switch();
+		}
+		if (Input.GetButtonDown("Drop")) {
+			int h = (int) Input.GetAxis ("Horizontal");
+			int v = (int) Input.GetAxis ("Vertical");
+			if (h == 0 && v == 0) {
+				v = -1;
+			}
+			DropWeapon (h,v);
+		}
 	}
 
     private void FixedUpdate()
@@ -28,8 +60,6 @@ public class PlayerController : MonoBehaviour {
         float h = Input.GetAxis("Horizontal");
 		float v = Input.GetAxis ("Vertical");
         //Fonction responsable du mouvement
-        Debug.Log("facing Down :" + v);
-        Debug.Log("facing Right :" + h);
         MovePlayer(h, v);
     }
 
@@ -100,4 +130,56 @@ public class PlayerController : MonoBehaviour {
         s.y *= -1;
         transform.localScale = s;
     }
+
+
+	private void Fire(int h, int v){
+
+		if (Time.time > nextFire) {
+			nextFire = Time.time + weapon[actualWeapon].GetfireRate();
+			Vector3 newVect = new Vector3 (GetComponent<Transform> ().position.x + 2*h, GetComponent<Transform> ().position.y, GetComponent<Transform> ().position.z + 4*v);
+			Shot clone;
+			clone = GameObject.Instantiate<Shot>(shot, newVect, Quaternion.identity);
+			clone.Set(weapon [actualWeapon].GetID(),h,v);
+		}
+	}
+
+	private void Switch()
+	{
+		if (actualWeapon == 0){
+			actualWeapon = 1;
+		}else{
+			actualWeapon = 0;
+		}
+	}
+
+	public bool GetAvaible() {
+		if (weapon [0].GetID() == 0 || (weapon [1].GetID() == 0)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void GetNewWeapon(int ID){
+
+		if (weapon [actualWeapon].GetID() == 0) {
+			weapon [actualWeapon] = dataController.SearchID(ID);
+		} else {
+			weapon[1-actualWeapon] = dataController.SearchID(ID);
+		}
+	}
+
+	private void DropWeapon(int h, int v)
+	{
+		if (weapon [actualWeapon].GetID() != 0) {
+			Vector3 newVect;
+			newVect = new Vector3 (GetComponent<Transform> ().position.x - 10*h, GetComponent<Transform> ().position.y, GetComponent<Transform> ().position.z-10*v);
+
+			WeaponGround clone;
+			clone = GameObject.Instantiate<WeaponGround> (weaponGround, newVect, Quaternion.identity);
+			clone.ID = weapon [actualWeapon].GetID();
+
+			weapon [actualWeapon] = dataController.SearchID(0);
+		}
+	}
 }
