@@ -8,3 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/scene with pro builder.unity
     guid: e9f71090ba335c94f878f84b6c143529
+  - enabled: 1
+    path: Assets/Scenes/endscreen.unity
+    guid: 3ff221138c0e6aa45981ce941c00eb5b

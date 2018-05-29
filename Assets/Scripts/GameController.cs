@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.IO;
-
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour {
 			} else {
 				winner = 1;
 			}
+			SceneManager.LoadScene (1);
 		}
 	}
 }
