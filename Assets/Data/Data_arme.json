@@ -3,7 +3,7 @@
 	{
 	"m_id": "00",
 	"m_fireRate" : 1,
-	"m_damage" : 0,
+	"m_damage" : 1,
 	"m_name" : "Astropoint",
 	"m_speedprojectile" : 24,
 	"m_force" : 1000,
