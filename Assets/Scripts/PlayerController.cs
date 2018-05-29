@@ -4,151 +4,171 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    private Rigidbody m_RigidBody;
-	private Animator m_Animator;
-	private WeaponOnPlayer[] weapon = new WeaponOnPlayer[2];
 	private DataController dataController = new DataController ();
+	private WeaponOnPlayer[] weapon = new WeaponOnPlayer[2];
+	private Rigidbody rigidBody;
+	private Animator animator;
+	private RageManager ragemanager;
+	private GameObject player;
+	private SpriteRenderer sprite;
 
 	private int actualWeapon = 0;
+	private Vector3 forceHit;
 	private float nextFire;
+	private bool facingRight = false;
+	private bool gettingHit = false;
+	private float m_rage = 0;
+	private float limite_rage = 100;
 
     public float maxSpeed = 5.0f;
+	public int ID;
 	public Shot shot;
 	public WeaponGround weaponGround;
 
-    private bool facingRight = false;
-    private bool facingDown = true;
-
     // Use this for initialization
     void Start () {
-        m_RigidBody = GetComponent<Rigidbody>();
-		m_Animator = GetComponentInChildren<Animator> ();
 
 		for (int i=0;i<2;i++){
 			weapon [i] = dataController.SearchID(0);
 		}
+
+        rigidBody = GetComponent<Rigidbody>();
+		animator = GetComponentInChildren<Animator> ();
+		sprite = GetComponentInChildren<SpriteRenderer> ();
+
+        //ragemanager = GameObject.Find("GlobalScript").GetComponent<RageManager>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetButton("Fire_P1"))
 		{
-			int h = (int) Input.GetAxis ("Horizontal");
-			int v = (int) Input.GetAxis ("Vertical");
+			int h = (int) Input.GetAxis ("Horizontal_P1");
+			int v = (int) Input.GetAxis ("Vertical_P1");
 			if (h == 0 && v == 0) {
 				v = -1;
 			}
-			Fire (h,v);
+			Fire (h,v,1);
 		}
-		if (Input.GetButtonDown("Switch"))
+		if (Input.GetButton("Fire_P2"))
 		{
-			Switch();
-		}
-		if (Input.GetButtonDown("Drop")) {
-			int h = (int) Input.GetAxis ("Horizontal");
-			int v = (int) Input.GetAxis ("Vertical");
+			int h = (int) Input.GetAxis ("Horizontal_P2");
+			int v = (int) Input.GetAxis ("Vertical_P2");
 			if (h == 0 && v == 0) {
 				v = -1;
 			}
-			DropWeapon (h,v);
+			Fire (h,v,2);
+		}
+		if (Input.GetButtonDown("Switch_P1"))
+		{
+			Switch(1);
+		}
+		if (Input.GetButtonDown("Switch_P2"))
+		{
+			Switch(2);
+		}
+		if (Input.GetButtonDown("Drop_P1")) {
+			int h = (int) Input.GetAxis ("Horizontal_P1");
+			int v = (int) Input.GetAxis ("Vertical_P1");
+			if (h == 0 && v == 0) {
+				v = -1;
+			}
+			DropWeapon (h,v,1);
+		}
+		if (Input.GetButtonDown("Drop_P2")) {
+			int h = (int) Input.GetAxis ("Horizontal_P2");
+			int v = (int) Input.GetAxis ("Vertical_P2");
+			if (h == 0 && v == 0) {
+				v = -1;
+			}
+			DropWeapon (h,v,2);
 		}
 	}
 
     private void FixedUpdate()
     {
         //Valeur entre -1 et 1 selon intentsité de frappe sur l'axe horizontal
-        float h = Input.GetAxis("Horizontal");
-		float v = Input.GetAxis ("Vertical");
+        float h1 = Input.GetAxis("Horizontal_P1");
+		float v1 = Input.GetAxis ("Vertical_P1");
+		float h2 = Input.GetAxis("Horizontal_P2");
+		float v2 = Input.GetAxis ("Vertical_P2");
         //Fonction responsable du mouvement
-        MovePlayer(h, v);
+		MovePlayer (h1, v1, 1);
+		MovePlayer (h2, v2, 2);
+
+		if (gettingHit) {
+			rigidBody.AddForce (forceHit, ForceMode.Impulse);
+			gettingHit = false;
+		}
     }
 
-	void MovePlayer( float h, float v )
-    {
-        m_RigidBody.velocity = new Vector3(h * maxSpeed, 0, v * maxSpeed);
+	private void MovePlayer( float h, float v, int player)
+	{
+		if (player == ID) {
+			rigidBody.velocity = new Vector3 (h * maxSpeed, 0, v * maxSpeed);
+			SetBool_H_V (h, v, player);
+			//Si on veut utiliser un miroir avec les sprites il faut ces lignes de code
+			if ((h > 0 && facingRight) || (h < 0 && !facingRight)) {
+				Flip (player);
+			}
+		} 
+	}
 
-        SetBool_H_V(h, v);
-
-    }
-
-    void SetBool_V(float v)
-    {
-        if (v > 0)
-        {
-            m_Animator.SetBool("GoUp", true);
-            m_Animator.SetBool("GoDown", false);
-        }
-        else if (v < 0)
-        {
-            m_Animator.SetBool("GoUp", false);
-            m_Animator.SetBool("GoDown", true);
-        }
-        else
-        {
-            m_Animator.SetBool("GoUp", false);
-            m_Animator.SetBool("GoDown", false);
-        }
-
-    }
-
-    void SetBool_H_V(float h, float v)
-    {
-        if (h > 0)
-        {
-            m_Animator.SetBool("GoLeft", false);
-            m_Animator.SetBool("GoRight", true);
-            SetBool_V(v);
-        }
-        else if (h < 0)
-        {
-            m_Animator.SetBool("GoLeft", true);
-            m_Animator.SetBool("GoRight", false);
-            SetBool_V(v);
-        }
-        else
-        {
-            m_Animator.SetBool("GoLeft", false);
-            m_Animator.SetBool("GoRight", false);
-            SetBool_V(v);
-        }
-    }
-
-    void FlipH()
-    {
-        facingRight = !facingRight;
-        
-        Vector3 s = transform.localScale;
-        s.x *= -1;
-        transform.localScale = s;
-    }
-
-    void FlipV()
-    {
-        facingDown = !facingDown;
-
-        Vector3 s = transform.localScale;
-        s.y *= -1;
-        transform.localScale = s;
-    }
-
-
-	private void Fire(int h, int v){
-
-		if (Time.time > nextFire) {
-			nextFire = Time.time + weapon[actualWeapon].GetfireRate();
-			Vector3 newVect = new Vector3 (GetComponent<Transform> ().position.x + 2*h, GetComponent<Transform> ().position.y, GetComponent<Transform> ().position.z + 4*v);
-			Shot clone;
-			clone = GameObject.Instantiate<Shot>(shot, newVect, Quaternion.identity);
-			clone.Set(weapon [actualWeapon].GetID(),h,v);
+	private void SetBool_V(float v, int player)
+	{
+		if (player == ID) {
+			if (v > 0) {
+				animator.SetBool ("GoUp", true);
+				animator.SetBool ("GoDown", false);
+			} else if (v < 0) {
+				animator.SetBool ("GoUp", false);
+				animator.SetBool ("GoDown", true);
+			} else {
+				animator.SetBool ("GoUp", false);
+				animator.SetBool ("GoDown", false);
+			}
 		}
 	}
 
-	private void Switch()
+	private void SetBool_H_V(float h, float v, int player)
 	{
-		if (actualWeapon == 0){
-			actualWeapon = 1;
-		}else{
-			actualWeapon = 0;
+		if (player == ID) {
+			if (h > 0) {
+				animator.SetBool ("GoLeft", false);
+				animator.SetBool ("GoRight", true);
+				SetBool_V (v, player);
+			} else if (h < 0) {
+				animator.SetBool ("GoLeft", true);
+				animator.SetBool ("GoRight", false);
+				SetBool_V (v, player);
+			} else {
+				animator.SetBool ("GoLeft", false);
+				animator.SetBool ("GoRight", false);
+				SetBool_V (v, player);
+			}
+		}
+	}
+
+	private void Fire(int h, int v, int player){
+
+		if (player == ID) {
+			if (Time.time > nextFire) {
+				nextFire = Time.time + weapon [actualWeapon].GetfireRate ();
+				Shot clone;
+				clone = GameObject.Instantiate<Shot> (shot, GetComponent<Transform> ().position, Quaternion.identity);
+				clone.Set (weapon [actualWeapon].GetID (),ID, h, v);
+			}
+		}
+	}
+
+	private void Switch(int player)
+	{
+		if (player == ID) {
+			if (actualWeapon == 0) {
+				actualWeapon = 1;
+			} else {
+				actualWeapon = 0;
+			}
 		}
 	}
 
@@ -169,17 +189,39 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private void DropWeapon(int h, int v)
+	private void DropWeapon(int h, int v, int player)
 	{
-		if (weapon [actualWeapon].GetID() != 0) {
-			Vector3 newVect;
-			newVect = new Vector3 (GetComponent<Transform> ().position.x - 10*h, GetComponent<Transform> ().position.y, GetComponent<Transform> ().position.z-10*v);
+		if (player == ID) {
+			if (weapon [actualWeapon].GetID () != 0) {
+				WeaponGround clone;
+				clone = GameObject.Instantiate<WeaponGround> (weaponGround, GetComponent<Transform> ().position, Quaternion.identity);
+				clone.ID = weapon [actualWeapon].GetID ();
+				clone.SetCreated (h,v);
 
-			WeaponGround clone;
-			clone = GameObject.Instantiate<WeaponGround> (weaponGround, newVect, Quaternion.identity);
-			clone.ID = weapon [actualWeapon].GetID();
-
-			weapon [actualWeapon] = dataController.SearchID(0);
+				weapon [actualWeapon] = dataController.SearchID (0);
+			}
 		}
 	}
+
+	private void Flip(int player)
+	{
+		if (player == ID) {
+			sprite.flipX = false;
+			facingRight = !facingRight;
+		} 
+	}
+
+	public void GetHit(Vector3 direction, int IDweapon) {
+		m_rage = m_rage + dataController.SearchID(IDweapon).Getdamage();
+		if (m_rage > limite_rage) {
+			m_rage = limite_rage;
+		}
+		gettingHit = true;
+		forceHit = dataController.SearchID(IDweapon).Getforce() * direction ;
+	}
+
+	public int GetID() {
+		return ID;
+	}
+		
 }
