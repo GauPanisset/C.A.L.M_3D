@@ -108,23 +108,18 @@ public class PlayerController : MonoBehaviour {
 			rigidBody.velocity = new Vector3 (h * maxSpeed, 0, v * maxSpeed);
 			SetBool_H_V (h, v, player);
 			//Si on veut utiliser un miroir avec les sprites il faut ces lignes de code
-			if ((h > 0 && facingRight) || (h < 0 && !facingRight)) {
+			/*if ((h > 0 && facingRight) || (h < 0 && !facingRight)) {
 				Flip (player);
-			}
+			}*/
 		} 
 	}
 
     private void PutBool4Directions_False(int player) {
-        if (player == 1) {
-            animator1.SetBool("GoUp", false);
-            animator1.SetBool("GoDown", false);
-            animator1.SetBool("GoLeft", false);
-            animator1.SetBool("GoRight", false);
-        } else {
-            animator2.SetBool("GoUp", false);
-            animator2.SetBool("GoDown", false);
-            animator2.SetBool("GoLeft", false);
-            animator2.SetBool("GoRight", false);
+        if (player == ID) {
+            animator.SetBool("GoUp", false);
+            animator.SetBool("GoDown", false);
+            animator.SetBool("GoLeft", false);
+            animator.SetBool("GoRight", false);
         }
     }
 
@@ -132,161 +127,67 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (player == ID) {
 			if (v > 0) {
-<<<<<<< HEAD
-				animator1.SetBool ("GoUp", true);
-				animator1.SetBool ("GoDown", false);
-                if (h > 0) {
-                    animator1.SetBool("GoUpRight", true);
-                    animator1.SetBool("GoUpLeft", false);
-                    PutBool4Directions_False(1);
-                } else if (h < 0) {
-                    animator1.SetBool("GoUpLeft", true);
-                    animator1.SetBool("GoUpRight", false);
-                    PutBool4Directions_False(1);
-                } else {
-                    animator1.SetBool("GoUpLeft", false);
-                    animator1.SetBool("GoUpRight", false);
-                }
-			} else if (v < 0) {
-				animator1.SetBool ("GoUp", false);
-				animator1.SetBool ("GoDown", true);
-                if (h > 0) {
-                    animator1.SetBool("GoDownRight", true);
-                    animator1.SetBool("GoDownLeft", false);
-                    PutBool4Directions_False(1);
-                } else if (h < 0) {
-                    animator1.SetBool("GoDownLeft", true);
-                    animator1.SetBool("GoDownRight", false);
-                    PutBool4Directions_False(1);
-                } else {
-                    animator1.SetBool("GoDownLeft", false);
-                    animator1.SetBool("GoDownRight", false);
-                }
-            } else {
-				animator1.SetBool ("GoUp", false);
-                animator1.SetBool("GoDown", false);
-                animator1.SetBool("GoDownLeft", false);
-                animator1.SetBool("GoDownRight", false);
-                animator1.SetBool("GoUpLeft", false);
-                animator1.SetBool("GoUpRight", false);
-            }
-		} else {
-            if (v > 0)
-            {
-                animator2.SetBool("GoUp", true);
-                animator2.SetBool("GoDown", false);
-                if (h > 0)
-                {
-                    animator2.SetBool("GoUpRight", true);
-                    animator2.SetBool("GoUpLeft", false);
-                    PutBool4Directions_False(2);
-                }
-                else if (h < 0)
-                {
-                    animator2.SetBool("GoUpLeft", true);
-                    animator2.SetBool("GoUpRight", false);
-                    PutBool4Directions_False(2);
-                }
-                else
-                {
-                    animator2.SetBool("GoUpLeft", false);
-                    animator2.SetBool("GoUpRight", false);
-                }
-            }
-            else if (v < 0)
-            {
-                animator2.SetBool("GoUp", false);
-                animator2.SetBool("GoDown", true);
-                if (h > 0)
-                {
-                    animator2.SetBool("GoDownRight", true);
-                    animator2.SetBool("GoDownLeft", false);
-                    PutBool4Directions_False(2);
-                }
-                else if (h < 0)
-                {
-                    animator2.SetBool("GoDownLeft", true);
-                    animator2.SetBool("GoDownRight", false);
-                    PutBool4Directions_False(2);
-                }
-                else
-                {
-                    animator2.SetBool("GoDownLeft", false);
-                    animator2.SetBool("GoDownRight", false);
-                }
-            }
-            else
-            {
-                animator2.SetBool("GoUp", false);
-                animator2.SetBool("GoDown", false);
-                animator2.SetBool("GoDownLeft", false);
-                animator2.SetBool("GoDownRight", false);
-                animator2.SetBool("GoUpLeft", false);
-                animator2.SetBool("GoUpRight", false);
-            }
-        }
-=======
 				animator.SetBool ("GoUp", true);
 				animator.SetBool ("GoDown", false);
+                if (h > 0) {
+                    animator.SetBool("GoUpRight", true);
+                    animator.SetBool("GoUpLeft", false);
+                    PutBool4Directions_False(ID);
+                } else if (h < 0) {
+                    animator.SetBool("GoUpLeft", true);
+                    animator.SetBool("GoUpRight", false);
+                    PutBool4Directions_False(ID);
+                } else {
+                    animator.SetBool("GoUpLeft", false);
+                    animator.SetBool("GoUpRight", false);
+                }
 			} else if (v < 0) {
 				animator.SetBool ("GoUp", false);
 				animator.SetBool ("GoDown", true);
-			} else {
+                if (h > 0) {
+                    animator.SetBool("GoDownRight", true);
+                    animator.SetBool("GoDownLeft", false);
+                    PutBool4Directions_False(ID);
+                } else if (h < 0) {
+                    animator.SetBool("GoDownLeft", true);
+                    animator.SetBool("GoDownRight", false);
+                    PutBool4Directions_False(ID);
+                } else {
+                    animator.SetBool("GoDownLeft", false);
+                    animator.SetBool("GoDownRight", false);
+                }
+            } else {
 				animator.SetBool ("GoUp", false);
-				animator.SetBool ("GoDown", false);
-			}
+                animator.SetBool("GoDown", false);
+                animator.SetBool("GoDownLeft", false);
+                animator.SetBool("GoDownRight", false);
+                animator.SetBool("GoUpLeft", false);
+                animator.SetBool("GoUpRight", false);
+            }
 		}
->>>>>>> 86bff81da013f4fd79fb34e680c59f814ad203ca
 	}
 
 	private void SetBool_H_V(float h, float v, int player)
 	{
 		if (player == ID) {
 			if (h > 0) {
-<<<<<<< HEAD
-				animator1.SetBool ("GoLeft", false);
-				animator1.SetBool ("GoRight", true);
-				SetBool_V (h, v, 1);
-			} else if (h < 0) {
-				animator1.SetBool ("GoLeft", true);
-				animator1.SetBool ("GoRight", false);
-				SetBool_V (h, v, 1);
-			} else {
-				animator1.SetBool ("GoLeft", false);
-				animator1.SetBool ("GoRight", false);
-				SetBool_V (h, v, 1);
-			}
-            if (h == 0 && v == 0) {
-                animator1.SetBool("Move", false);
-            } else {
-                animator1.SetBool("Move", true);
-            }
-		} else {
-			if (h > 0) {
-				animator2.SetBool ("GoLeft", false);
-				animator2.SetBool ("GoRight", true);
-				SetBool_V (h, v, 2);
-			} else if (h < 0) {
-				animator2.SetBool ("GoLeft", true);
-				animator2.SetBool ("GoRight", false);
-				SetBool_V (h, v, 2);
-			} else {
-				animator2.SetBool ("GoLeft", false);
-				animator2.SetBool ("GoRight", false);
-				SetBool_V (h, v, 2);
-=======
 				animator.SetBool ("GoLeft", false);
 				animator.SetBool ("GoRight", true);
-				SetBool_V (v, player);
+				SetBool_V (h, v, ID);
 			} else if (h < 0) {
 				animator.SetBool ("GoLeft", true);
 				animator.SetBool ("GoRight", false);
-				SetBool_V (v, player);
+				SetBool_V (h, v, ID);
 			} else {
 				animator.SetBool ("GoLeft", false);
 				animator.SetBool ("GoRight", false);
-				SetBool_V (v, player);
+				SetBool_V (h, v, ID);
 			}
+            if (h == 0 && v == 0) {
+                animator.SetBool("Move", false);
+            } else {
+                animator.SetBool("Move", true);
+            }
 		}
 	}
 
@@ -298,13 +199,7 @@ public class PlayerController : MonoBehaviour {
 				Shot clone;
 				clone = GameObject.Instantiate<Shot> (shot, GetComponent<Transform> ().position, Quaternion.identity);
 				clone.Set (weapon [actualWeapon].GetID (),ID, h, v);
->>>>>>> 86bff81da013f4fd79fb34e680c59f814ad203ca
 			}
-            if (h == 0 && v == 0) {
-                animator2.SetBool("Move", false);
-            } else {
-                animator2.SetBool("Move", true);
-            }
         }
 	}
 
