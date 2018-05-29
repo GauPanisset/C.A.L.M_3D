@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 	private bool facingRight = false;
 	private bool gettingHit = false;
 	private float m_rage = 0;
-	private float limite_rage = 100;
+	private float add_rage;
 
     public float maxSpeed = 5.0f;
 	public int ID;
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour {
 		animator = GetComponentInChildren<Animator> ();
 		sprite = GetComponentInChildren<SpriteRenderer> ();
 
-        //ragemanager = GameObject.Find("GlobalScript").GetComponent<RageManager>();
+        ragemanager = GameObject.Find("GlobalScript").GetComponent<RageManager>();
 	}
 	
 	// Update is called once per frame
@@ -212,16 +212,19 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void GetHit(Vector3 direction, int IDweapon) {
-		m_rage = m_rage + dataController.SearchID(IDweapon).Getdamage();
-		if (m_rage > limite_rage) {
-			m_rage = limite_rage;
-		}
+		add_rage = dataController.SearchID(IDweapon).Getdamage();
+		m_rage = m_rage + add_rage;
+		ragemanager.AddRage(add_rage,ID);
 		gettingHit = true;
 		forceHit = dataController.SearchID(IDweapon).Getforce() * direction ;
 	}
 
 	public int GetID() {
 		return ID;
+	}
+
+	public float GetRage() {
+		return m_rage;
 	}
 		
 }
