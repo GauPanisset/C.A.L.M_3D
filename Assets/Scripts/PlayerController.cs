@@ -93,31 +93,116 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private void SetBool_V(float v, int player)
+    private void PutBool4Directions_False(int player) {
+        if (player == 1) {
+            animator1.SetBool("GoUp", false);
+            animator1.SetBool("GoDown", false);
+            animator1.SetBool("GoLeft", false);
+            animator1.SetBool("GoRight", false);
+        } else {
+            animator2.SetBool("GoUp", false);
+            animator2.SetBool("GoDown", false);
+            animator2.SetBool("GoLeft", false);
+            animator2.SetBool("GoRight", false);
+        }
+    }
+
+	private void SetBool_V(float h, float v, int player)
 	{
 		if (player == 1) {
 			if (v > 0) {
 				animator1.SetBool ("GoUp", true);
 				animator1.SetBool ("GoDown", false);
+                if (h > 0) {
+                    animator1.SetBool("GoUpRight", true);
+                    animator1.SetBool("GoUpLeft", false);
+                    PutBool4Directions_False(1);
+                } else if (h < 0) {
+                    animator1.SetBool("GoUpLeft", true);
+                    animator1.SetBool("GoUpRight", false);
+                    PutBool4Directions_False(1);
+                } else {
+                    animator1.SetBool("GoUpLeft", false);
+                    animator1.SetBool("GoUpRight", false);
+                }
 			} else if (v < 0) {
 				animator1.SetBool ("GoUp", false);
 				animator1.SetBool ("GoDown", true);
-			} else {
+                if (h > 0) {
+                    animator1.SetBool("GoDownRight", true);
+                    animator1.SetBool("GoDownLeft", false);
+                    PutBool4Directions_False(1);
+                } else if (h < 0) {
+                    animator1.SetBool("GoDownLeft", true);
+                    animator1.SetBool("GoDownRight", false);
+                    PutBool4Directions_False(1);
+                } else {
+                    animator1.SetBool("GoDownLeft", false);
+                    animator1.SetBool("GoDownRight", false);
+                }
+            } else {
 				animator1.SetBool ("GoUp", false);
-				animator1.SetBool ("GoDown", false);
-			}
+                animator1.SetBool("GoDown", false);
+                animator1.SetBool("GoDownLeft", false);
+                animator1.SetBool("GoDownRight", false);
+                animator1.SetBool("GoUpLeft", false);
+                animator1.SetBool("GoUpRight", false);
+            }
 		} else {
-			if (v > 0) {
-				animator2.SetBool ("GoUp", true);
-				animator2.SetBool ("GoDown", false);
-			} else if (v < 0) {
-				animator2.SetBool ("GoUp", false);
-				animator2.SetBool ("GoDown", true);
-			} else {
-				animator2.SetBool ("GoUp", false);
-				animator2.SetBool ("GoDown", false);
-			}
-		}
+            if (v > 0)
+            {
+                animator2.SetBool("GoUp", true);
+                animator2.SetBool("GoDown", false);
+                if (h > 0)
+                {
+                    animator2.SetBool("GoUpRight", true);
+                    animator2.SetBool("GoUpLeft", false);
+                    PutBool4Directions_False(2);
+                }
+                else if (h < 0)
+                {
+                    animator2.SetBool("GoUpLeft", true);
+                    animator2.SetBool("GoUpRight", false);
+                    PutBool4Directions_False(2);
+                }
+                else
+                {
+                    animator2.SetBool("GoUpLeft", false);
+                    animator2.SetBool("GoUpRight", false);
+                }
+            }
+            else if (v < 0)
+            {
+                animator2.SetBool("GoUp", false);
+                animator2.SetBool("GoDown", true);
+                if (h > 0)
+                {
+                    animator2.SetBool("GoDownRight", true);
+                    animator2.SetBool("GoDownLeft", false);
+                    PutBool4Directions_False(2);
+                }
+                else if (h < 0)
+                {
+                    animator2.SetBool("GoDownLeft", true);
+                    animator2.SetBool("GoDownRight", false);
+                    PutBool4Directions_False(2);
+                }
+                else
+                {
+                    animator2.SetBool("GoDownLeft", false);
+                    animator2.SetBool("GoDownRight", false);
+                }
+            }
+            else
+            {
+                animator2.SetBool("GoUp", false);
+                animator2.SetBool("GoDown", false);
+                animator2.SetBool("GoDownLeft", false);
+                animator2.SetBool("GoDownRight", false);
+                animator2.SetBool("GoUpLeft", false);
+                animator2.SetBool("GoUpRight", false);
+            }
+        }
 	}
 
 	private void SetBool_H_V(float h, float v, int player)
@@ -126,31 +211,41 @@ public class PlayerController : MonoBehaviour {
 			if (h > 0) {
 				animator1.SetBool ("GoLeft", false);
 				animator1.SetBool ("GoRight", true);
-				SetBool_V (v, 1);
+				SetBool_V (h, v, 1);
 			} else if (h < 0) {
 				animator1.SetBool ("GoLeft", true);
 				animator1.SetBool ("GoRight", false);
-				SetBool_V (v, 1);
+				SetBool_V (h, v, 1);
 			} else {
 				animator1.SetBool ("GoLeft", false);
 				animator1.SetBool ("GoRight", false);
-				SetBool_V (v, 1);
+				SetBool_V (h, v, 1);
 			}
+            if (h == 0 && v == 0) {
+                animator1.SetBool("Move", false);
+            } else {
+                animator1.SetBool("Move", true);
+            }
 		} else {
 			if (h > 0) {
 				animator2.SetBool ("GoLeft", false);
 				animator2.SetBool ("GoRight", true);
-				SetBool_V (v, 2);
+				SetBool_V (h, v, 2);
 			} else if (h < 0) {
 				animator2.SetBool ("GoLeft", true);
 				animator2.SetBool ("GoRight", false);
-				SetBool_V (v, 2);
+				SetBool_V (h, v, 2);
 			} else {
 				animator2.SetBool ("GoLeft", false);
 				animator2.SetBool ("GoRight", false);
-				SetBool_V (v, 2);
+				SetBool_V (h, v, 2);
 			}
-		}
+            if (h == 0 && v == 0) {
+                animator2.SetBool("Move", false);
+            } else {
+                animator2.SetBool("Move", true);
+            }
+        }
 	}
 
 	private void Flip(int player)
