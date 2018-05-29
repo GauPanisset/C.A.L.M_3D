@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
 	private PlayerController player1;
 	private PlayerController player2;
 	private float loose_rage = 100;
+	private int winner = 0;
 
 	// Use this for initialization
 	void Awake () {
@@ -21,7 +22,11 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (player1.GetRage () >= loose_rage || player2.GetRage () >= loose_rage) {
-			Debug.Log ("Win");
+			if (player1.GetRage () >= loose_rage) {
+				winner = 2;
+			} else {
+				winner = 1;
+			}
 		}
 	}
 }
