@@ -9,11 +9,11 @@ public class PlayerController : MonoBehaviour {
 	private Rigidbody rigidBody;
 	private Animator animator;
 	private RageManager ragemanager;
-	private GameObject player;
+	private GameController gameController;
 	private SpriteRenderer sprite;
 
 	private int h_direction;
-	private int v_direction;
+	private int v_direction = -1;
 	private int actualWeapon = 0;
 	private Vector3 forceHit;
 	private float nextFire;
@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
 	private bool gettingHit = false;
 	private float m_rage = 0;
 	private float add_rage;
+	private float loose_rage = 100;
 
     public float maxSpeed = 5.0f;
 	public int ID;
@@ -39,11 +40,16 @@ public class PlayerController : MonoBehaviour {
 		sprite = GetComponentInChildren<SpriteRenderer> ();
 
         ragemanager = GameObject.Find("GlobalScript").GetComponent<RageManager>();
+		gameController = GameObject.Find("GameController").GetComponent<GameController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		if (m_rage >= loose_rage) {
+			Loose ();
+		}
+
 		BoolAnimatorToDirection ();
 
 		if (Input.GetButton("Fire_P1"))
@@ -297,6 +303,12 @@ public class PlayerController : MonoBehaviour {
 			h_direction = 1;
 			v_direction = -1;
 		}
+	}
+
+	private void Loose() {
+		gameController.SetWinner (ID);
+		gameController.EndGame ();
+
 	}
 		
 }
