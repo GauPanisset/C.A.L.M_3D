@@ -29,8 +29,8 @@ public class RageManager : MonoBehaviour
     {
         rage_1.fillAmount = taux_rage_1 / maxrage;
         rage_2.fillAmount = taux_rage_2 / maxrage;
-		rageValue_1.text = ((int)taux_rage_1) + " / 100";
-		rageValue_2.text = ((int)taux_rage_2) + " / 100";
+		rageValue_1.text = Mathf.RoundToInt(taux_rage_1) + " / 100";
+		rageValue_2.text = Mathf.RoundToInt(taux_rage_2) + " / 100";
     }
 	void FixedUpdate() {
 		taux_rage_1 -= rageDecay;

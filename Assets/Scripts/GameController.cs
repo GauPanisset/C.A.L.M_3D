@@ -8,11 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
+	public AudioSource audio;
+
 	private int m_winner = 0;
 
 	// Use this for initialization
 	void Start () {
-		
+		audio.Play ();
 	}
 	
 	// Update is called once per frame
