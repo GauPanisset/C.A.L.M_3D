@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
 		animator = GetComponentInChildren<Animator> ();
 		sprite = GetComponentInChildren<SpriteRenderer> ();
 
-        ragemanager = GameObject.Find("GlobalScript").GetComponent<RageManager>();
+        ragemanager = GameObject.Find("Canvas").GetComponent<RageManager>();
 		gameController = GameObject.Find("GameController").GetComponent<GameController>();
 	}
 	
