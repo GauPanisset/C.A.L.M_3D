@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour {
 	private GameObject player;
 	private SpriteRenderer sprite;
 
+	private int h_direction;
+	private int v_direction;
 	private int actualWeapon = 0;
 	private Vector3 forceHit;
 	private float nextFire;
@@ -41,23 +43,16 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+		BoolAnimatorToDirection ();
+
 		if (Input.GetButton("Fire_P1"))
 		{
-			int h = (int) Input.GetAxis ("Horizontal_P1");
-			int v = (int) Input.GetAxis ("Vertical_P1");
-			if (h == 0 && v == 0) {
-				v = -1;
-			}
-			Fire (h,v,1);
+			Fire (h_direction,v_direction,1);
 		}
 		if (Input.GetButton("Fire_P2"))
 		{
-			int h = (int) Input.GetAxis ("Horizontal_P2");
-			int v = (int) Input.GetAxis ("Vertical_P2");
-			if (h == 0 && v == 0) {
-				v = -1;
-			}
-			Fire (h,v,2);
+			Fire (h_direction,v_direction,2);
 		}
 		if (Input.GetButtonDown("Switch_P1"))
 		{
@@ -267,6 +262,41 @@ public class PlayerController : MonoBehaviour {
 
 	public float GetRage() {
 		return m_rage;
+	}
+
+	private void BoolAnimatorToDirection() {
+		if (animator.GetBool ("GoUp")) {
+			h_direction = 0;
+			v_direction = 1;
+		}
+		if (animator.GetBool ("GoDown")) {
+			h_direction = 0;
+			v_direction = -1;
+		}
+		if (animator.GetBool ("GoLeft")) {
+			h_direction = -1;
+			v_direction = 0;
+		}
+		if (animator.GetBool ("GoRight")) {
+			h_direction = 1;
+			v_direction = 0;
+		}
+		if (animator.GetBool ("GoUpLeft")) {
+			h_direction = -1;
+			v_direction = 1;
+		}
+		if (animator.GetBool ("GoUpRight")) {
+			h_direction = 1;
+			v_direction = 1;
+		}
+		if (animator.GetBool ("GoDownLeft")) {
+			h_direction = -1;
+			v_direction = -1;
+		}
+		if (animator.GetBool ("GoDownRight")) {
+			h_direction = 1;
+			v_direction = -1;
+		}
 	}
 		
 }
