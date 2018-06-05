@@ -16,7 +16,6 @@ public class WeaponOnPlayer{
 	[SerializeField] private int m_idSprWeapon = 0;
 	[SerializeField] private string m_pathSprShot = null;
 	[SerializeField] private int m_idSprShot = 0;
-	[SerializeField] private string m_type = null;
 
 	public int GetID(){
 		return m_id;
@@ -57,14 +56,9 @@ public class WeaponOnPlayer{
 	public int GetidSprShot(){
 		return m_idSprShot;
 	}
-
-	public string Gettype(){
-		return m_type;
-	}
 }
 
 [Serializable]
 public class WeaponList{
 	public List<WeaponOnPlayer> weaponOnPlayer;
 }
-	

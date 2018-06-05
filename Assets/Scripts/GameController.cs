@@ -29,10 +29,6 @@ public class GameController : MonoBehaviour {
 		SceneManager.LoadScene (0);
 	}
 
-	public void QuitGame() {
-		Application.Quit();
-	}
-
 	public int GetWinner() {
 		return m_winner;
 	}
