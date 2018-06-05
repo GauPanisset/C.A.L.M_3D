@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114902541064136226}
   m_Layer: 0
   m_Name: player1_iso
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,8 +55,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1327532765505610}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30, y: 2, z: -46.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 10, y: 0.92, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4897901670627262}
   m_Father: {fileID: 0}
@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1846178058911600}
   m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: -0.1, y: 0, z: -0.1}
+  m_LocalPosition: {x: -0.1, y: 0.2, z: -0.1}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 4295802818478900}
@@ -159,7 +159,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0b43d23d5e77174b8b8efd7e221d45a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
+  maxSpeed: 20
+  ID: 1
+  shot: {fileID: 114733523523546876, guid: 53620d7305bc1d6488ff6b839e120849, type: 2}
+  weaponGround: {fileID: 114924298962510052, guid: dec8687b9f68b2b4a9f5b2145b29124f,
+    type: 2}
 --- !u!136 &136671395791373826
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -169,10 +173,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.55
-  m_Height: 1.75
+  m_Radius: 0.6210889
+  m_Height: 1.9240224
   m_Direction: 1
-  m_Center: {x: -0, y: 0, z: -0}
+  m_Center: {x: -0.094614744, y: 0.107659936, z: -0.20280164}
 --- !u!212 &212818703933008510
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -207,7 +211,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: fb423d5bdfb0f594bade027c20f14e92, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 25f885f8b16b3e84ca4232ce230447a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
