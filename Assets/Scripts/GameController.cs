@@ -4,24 +4,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.IO;
-
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
-	private PlayerController player1;
-	private PlayerController player2;
-	private float loose_rage = 100;
+	private int m_winner = 0;
 
 	// Use this for initialization
-	void Awake () {
-		player1 = GameObject.Find ("player1_iso").GetComponent<PlayerController>();
-		player2 = GameObject.Find ("player2_iso").GetComponent<PlayerController>();
+	void Start () {
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (player1.GetRage () >= loose_rage || player2.GetRage () >= loose_rage) {
-			Debug.Log ("Win");
+		
+	}
+
+	public void EndGame() {
+		DontDestroyOnLoad (this.gameObject);
+		SceneManager.LoadScene (1);
+	}
+
+	public void Restart() {
+		SceneManager.LoadScene (0);
+		Destroy (gameObject);
+	}
+
+	public void QuitGame() {
+		Application.Quit();
+	}
+
+	public int GetWinner() {
+		return m_winner;
+	}
+
+	public void SetWinner(int looser) {
+		if (looser == 1) {
+			m_winner = 2;
+		} else {
+			m_winner = 1;
 		}
 	}
 }
