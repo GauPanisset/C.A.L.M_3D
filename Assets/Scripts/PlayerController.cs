@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour {
 	public Shot shot;
 	public WeaponGround weaponGround;
 
+    public float dashSpeed;
+    private float dashTime;
+    public float startDashTime;
+
     // Use this for initialization
     void Start () {
 
@@ -81,6 +85,7 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        BoolAnimatorToDirection();
         //Valeur entre -1 et 1 selon intentsité de frappe sur l'axe horizontal
         float h1 = Input.GetAxis("Horizontal_P1");
 		float v1 = Input.GetAxis ("Vertical_P1");
@@ -89,6 +94,11 @@ public class PlayerController : MonoBehaviour {
         //Fonction responsable du mouvement
 		MovePlayer (h1, v1, 1);
 		MovePlayer (h2, v2, 2);
+
+        if (Input.GetButton("Dash_P1"))
+        {
+            DashPlayer(h_direction, v_direction, 1);
+        }
 
 		if (gettingHit) {
 			rigidBody.AddForce (forceHit, ForceMode.Impulse);
@@ -107,6 +117,15 @@ public class PlayerController : MonoBehaviour {
 			}*/
 		} 
 	}
+
+    private void DashPlayer(float h, float v, int player)
+    {
+        if (ID == player)
+        {
+
+        }
+    
+    }
 
     private void PutBool4Directions_False(int player) {
         if (player == ID) {
