@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [ERR]	NetworkException: Can't get info from local engine at:127.0.0.1:5761: Connect Failed
 			D:\dev\satellite-library\src\adapter\EngineAdapter.cpp:30 in _getLocalEngineID()
 [ERR]	BadParameter: This topic is already subscribed to
@@ -34,3 +35,5 @@
 			D:\dev\satellite-library\src\adapter\EngineAdapter.cpp:30 in _getLocalEngineID()
 [ERR]	NetworkException: Can't get info from local engine at:127.0.0.1:5761: Connect Failed
 			D:\dev\satellite-library\src\adapter\EngineAdapter.cpp:30 in _getLocalEngineID()
+=======
+>>>>>>> parent of c0c491a... Changement de la rage, gestion totale dans le scrpit RageManager et non plus partagée avec PlayerController

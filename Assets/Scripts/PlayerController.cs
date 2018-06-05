@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour {
 	private float nextFire;
 	private bool facingRight = false;
 	private bool gettingHit = false;
+	private float m_rage = 0;
+	private float add_rage;
+	private float loose_rage = 100;
 
     public float maxSpeed = 5.0f;
 	public int ID;
@@ -42,6 +45,10 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (m_rage >= loose_rage) {
+			Loose ();
+		}
 
 		BoolAnimatorToDirection ();
 
@@ -248,12 +255,19 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void GetHit(Vector3 direction, int IDweapon) {
+		add_rage = dataController.SearchID(IDweapon).Getdamage();
+		m_rage = m_rage + add_rage;
+		ragemanager.AddRage(add_rage,ID);
 		gettingHit = true;
 		forceHit = dataController.SearchID(IDweapon).Getforce() * direction ;
 	}
 
 	public int GetID() {
 		return ID;
+	}
+
+	public float GetRage() {
+		return m_rage;
 	}
 
 	private void BoolAnimatorToDirection() {
@@ -289,6 +303,12 @@ public class PlayerController : MonoBehaviour {
 			h_direction = 1;
 			v_direction = -1;
 		}
+	}
+
+	private void Loose() {
+		gameController.SetWinner (ID);
+		gameController.EndGame ();
+
 	}
 		
 }

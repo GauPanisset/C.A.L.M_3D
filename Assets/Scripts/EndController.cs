@@ -18,7 +18,7 @@ public class EndController : MonoBehaviour {
 		gameController = GameObject.Find("GameController").GetComponent<GameController>();
 		m_text.text = "Le joueur " + gameController.GetWinner () + " a gagné !";
 		m_restart.onClick.AddListener (() => {gameController.Restart ();});
-		m_quit.onClick.AddListener (() => {gameController.QuitGame();});
+		m_quit.onClick.AddListener (() => {gameController.QuitGame ();});
 	}
 	
 	// Update is called once per frame

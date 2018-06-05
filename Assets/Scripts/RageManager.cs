@@ -13,13 +13,10 @@ public class RageManager : MonoBehaviour
     private float taux_rage_2;
     private float maxrage = 100f;
 	private float rageDecay = 0.01f;
-	private DataController dataController = new DataController ();
-	private GameController gameController;
 
     // Use this for initialization
     void Start ()
     {
-		gameController = GameObject.Find("GameController").GetComponent<GameController>();
         taux_rage_1 = 0;
         taux_rage_2 = 0;
 		rageValue_1.text = "0 / 100";
@@ -30,13 +27,12 @@ public class RageManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        
+        rage_1.fillAmount = taux_rage_1 / maxrage;
+        rage_2.fillAmount = taux_rage_2 / maxrage;
+		rageValue_1.text = Mathf.RoundToInt(taux_rage_1) + " / 100";
+		rageValue_2.text = Mathf.RoundToInt(taux_rage_2) + " / 100";
     }
-
 	void FixedUpdate() {
-		rage_1.fillAmount = taux_rage_1 / maxrage;
-		rage_2.fillAmount = taux_rage_2 / maxrage;
-
 		taux_rage_1 -= rageDecay;
 		taux_rage_2 -= rageDecay;
 		if (taux_rage_1 < 0) {
@@ -45,33 +41,15 @@ public class RageManager : MonoBehaviour
 		if (taux_rage_2 < 0) {
 			taux_rage_2 = 0;
 		}
-		if (taux_rage_1 >= 100) {
-			taux_rage_1 = 100;
-			Loose (1);
-		}
-		if (taux_rage_2 >= 100) {
-			taux_rage_2 = 100;
-			Loose (2);
-		}
-		rageValue_1.text = Mathf.RoundToInt(taux_rage_1) + " / 100";
-		rageValue_2.text = Mathf.RoundToInt(taux_rage_2) + " / 100";
 	}
 
-	public void AddRage(int id,int damageSource) {
-		float rage = dataController.SearchID(id).Getdamage();
-		if (damageSource == 1)
-        {
-            taux_rage_2 += rage;
-        }else
+    public void AddRage(float rage,int player) {
+        if (player == 1)
         {
             taux_rage_1 += rage;
+        }else
+        {
+            taux_rage_2 += rage;
         }
     }
-
-	private void Loose(int ID) {
-		gameController.SetWinner (ID);
-		gameController.EndGame ();
-
-	}
-
 }

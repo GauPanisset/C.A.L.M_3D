@@ -46,5 +46,4 @@ public class Shot : MonoBehaviour {
 	public int GetSource() {
 		return idSource;
 	}
-
 }
