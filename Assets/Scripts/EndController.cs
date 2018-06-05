@@ -10,6 +10,7 @@ public class EndController : MonoBehaviour {
 
 	public Image background;
 	public Button m_restart;
+	public Button m_quit;
 	public Text m_text;
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,7 @@ public class EndController : MonoBehaviour {
 		gameController = GameObject.Find("GameController").GetComponent<GameController>();
 		m_text.text = "Le joueur " + gameController.GetWinner () + " a gagné !";
 		m_restart.onClick.AddListener (() => {gameController.Restart ();});
+		m_quit.onClick.AddListener (() => {gameController.QuitGame();});
 	}
 	
 	// Update is called once per frame
