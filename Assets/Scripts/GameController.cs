@@ -20,14 +20,18 @@ public class GameController : MonoBehaviour {
 		
 	}
 
-	public void EndGame() {
+	public void StartGame() {
 		DontDestroyOnLoad (this.gameObject);
 		SceneManager.LoadScene (1);
 	}
 
-	public void Restart() {
+	public void EndGame() {
+		DontDestroyOnLoad (this.gameObject);
+		SceneManager.LoadScene (2);
+	}
+
+	public void RestartGame() {
 		SceneManager.LoadScene (0);
-		Destroy (gameObject);
 	}
 
 	public void QuitGame() {
