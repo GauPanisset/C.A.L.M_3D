@@ -1940,7 +1940,7 @@ Prefab:
     - target: {fileID: 114902541064136226, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
         type: 2}
       propertyPath: dashSpeed
-      value: 70
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 114902541064136226, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
         type: 2}
@@ -10994,7 +10994,7 @@ Prefab:
     - target: {fileID: 114902541064136226, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
         type: 2}
       propertyPath: dashSpeed
-      value: 70
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 114902541064136226, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
         type: 2}

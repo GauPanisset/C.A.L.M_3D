@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour {
     public float dashSpeed;
     private float dashTime;
     public float startDashTime;
+    private bool dashEnable = true;
+    private float countdown = 2.0f;
 
     // Use this for initialization
     void Start () {
@@ -81,6 +83,8 @@ public class PlayerController : MonoBehaviour {
 			}
 			DropWeapon (h,v,2);
 		}
+
+        countdown -= Time.deltaTime;
 	}
 
     private void FixedUpdate()
@@ -132,12 +136,21 @@ public class PlayerController : MonoBehaviour {
                 dashTime = startDashTime;
                 rigidBody.velocity = Vector3.zero;
             }
-            else
+            else if (dashEnable == true)
             {
                 dashTime -= Time.deltaTime;
                 rigidBody.velocity = new Vector3(h * dashSpeed, 0, v * dashSpeed);
+                countdown = 2.0f;
             }
-            
+            if (countdown < 0)
+            {
+                dashEnable = true;
+            }
+            else
+            {
+                dashEnable = false;
+            }
+
         }
     
     }
