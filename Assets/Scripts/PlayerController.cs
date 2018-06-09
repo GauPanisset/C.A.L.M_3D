@@ -122,7 +122,17 @@ public class PlayerController : MonoBehaviour {
     {
         if (ID == player)
         {
-
+            if (dashTime <= 0)
+            {
+                dashTime = startDashTime;
+                rigidBody.velocity = Vector3.zero;
+            }
+            else
+            {
+                dashTime -= Time.deltaTime;
+                rigidBody.velocity = new Vector3(h * dashSpeed, 0, v * dashSpeed);
+            }
+            
         }
     
     }
