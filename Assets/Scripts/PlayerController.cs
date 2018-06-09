@@ -95,12 +95,17 @@ public class PlayerController : MonoBehaviour {
 		MovePlayer (h1, v1, 1);
 		MovePlayer (h2, v2, 2);
 
-        if (Input.GetButton("Dash_P1"))
+        if (Input.GetButton("Dash_P1") && ((h1 != 0) || (v1 != 0)))
         {
             DashPlayer(h_direction, v_direction, 1);
         }
 
-		if (gettingHit) {
+        if (Input.GetButton("Dash_P2") && ((h2 != 0) || (v2 != 0)))
+        {
+            DashPlayer(h_direction, v_direction, 2);
+        }
+
+        if (gettingHit) {
 			rigidBody.AddForce (forceHit, ForceMode.Impulse);
 			gettingHit = false;
 		}
