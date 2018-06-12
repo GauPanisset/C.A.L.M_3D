@@ -1,34 +1,29 @@
 fileFormatVersion: 2
-guid: 02916713da02edf49b6ed3eddcb734ef
-timeCreated: 1528789259
+guid: b2652119ce4d162488a279e18f779476
+timeCreated: 1528796362
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: RunSpriteBoy_Reverse_0
-    21300002: RunSpriteBoy_Reverse_1
-    21300004: RunSpriteBoy_Reverse_2
-    21300006: RunSpriteBoy_Reverse_3
-    21300008: RunSpriteBoy_Reverse_4
-    21300010: RunSpriteBoy_Reverse_5
-    21300012: RunSpriteBoy_Reverse_6
-    21300014: RunSpriteBoy_Reverse_7
-    21300016: RunSpriteBoy_Reverse_8
-    21300018: RunSpriteBoy_Reverse_9
-    21300020: RunSpriteBoy_Reverse_10
-    21300022: RunSpriteBoy_Reverse_11
-    21300024: RunSpriteBoy_Reverse_12
-    21300026: RunSpriteBoy_Reverse_13
-    21300028: RunSpriteBoy_Reverse_14
-    21300030: RunSpriteBoy_Reverse_15
-    21300032: RunSpriteBoy_Reverse_16
-    21300034: RunSpriteBoy_Reverse_17
-    21300036: RunSpriteBoy_Reverse_18
-    21300038: RunSpriteBoy_Reverse_19
-    21300040: RunSpriteBoy_Reverse_20
-    21300042: RunSpriteBoy_Reverse_21
-    21300044: RunSpriteBoy_Reverse_22
-    21300046: RunSpriteBoy_Reverse_23
-    21300048: RunSpriteBoy_Reverse_24
+    21300000: HitSpriteBoy_0
+    21300002: HitSpriteBoy_1
+    21300004: HitSpriteBoy_2
+    21300006: HitSpriteBoy_3
+    21300008: HitSpriteBoy_4
+    21300010: HitSpriteBoy_5
+    21300012: HitSpriteBoy_6
+    21300014: HitSpriteBoy_7
+    21300016: HitSpriteBoy_8
+    21300018: HitSpriteBoy_9
+    21300020: HitSpriteBoy_10
+    21300022: HitSpriteBoy_11
+    21300024: HitSpriteBoy_12
+    21300026: HitSpriteBoy_13
+    21300028: HitSpriteBoy_14
+    21300030: HitSpriteBoy_15
+    21300032: HitSpriteBoy_16
+    21300034: HitSpriteBoy_17
+    21300036: HitSpriteBoy_18
+    21300038: HitSpriteBoy_19
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -105,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_0
+      name: HitSpriteBoy_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 239.2
-        width: 59.8
-        height: 59.8
+        x: 60
+        y: 240
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,13 +114,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_1
+      name: HitSpriteBoy_1
       rect:
         serializedVersion: 2
-        x: 59
-        y: 239.2
-        width: 59.8
-        height: 59.8
+        x: 120
+        y: 240
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,13 +128,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_2
+      name: HitSpriteBoy_2
       rect:
         serializedVersion: 2
-        x: 118
-        y: 239.2
-        width: 59.8
-        height: 59.8
+        x: 180
+        y: 240
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,13 +142,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_3
+      name: HitSpriteBoy_3
       rect:
         serializedVersion: 2
-        x: 177
-        y: 239.2
-        width: 59.8
-        height: 59.8
+        x: 240
+        y: 240
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,13 +156,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_4
+      name: HitSpriteBoy_4
       rect:
         serializedVersion: 2
-        x: 236
-        y: 239.2
-        width: 59.8
-        height: 59.8
+        x: 60
+        y: 180
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,13 +170,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_5
+      name: HitSpriteBoy_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 180.2
-        width: 59.8
-        height: 59.8
+        x: 120
+        y: 180
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -189,13 +184,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_6
+      name: HitSpriteBoy_6
       rect:
         serializedVersion: 2
-        x: 59
-        y: 180.2
-        width: 59.8
-        height: 59.8
+        x: 180
+        y: 180
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,13 +198,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_7
+      name: HitSpriteBoy_7
       rect:
         serializedVersion: 2
-        x: 118
-        y: 180.2
-        width: 59.8
-        height: 59.8
+        x: 240
+        y: 180
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -217,13 +212,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_8
+      name: HitSpriteBoy_8
       rect:
         serializedVersion: 2
-        x: 177
-        y: 180.2
-        width: 59.8
-        height: 59.8
+        x: 60
+        y: 120
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,13 +226,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_9
+      name: HitSpriteBoy_9
       rect:
         serializedVersion: 2
-        x: 236
-        y: 180.2
-        width: 59.8
-        height: 59.8
+        x: 120
+        y: 120
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,13 +240,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_10
+      name: HitSpriteBoy_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 121.2
-        width: 59.8
-        height: 59.8
+        x: 180
+        y: 120
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,13 +254,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_11
+      name: HitSpriteBoy_11
       rect:
         serializedVersion: 2
-        x: 59
-        y: 121.2
-        width: 59.8
-        height: 59.8
+        x: 240
+        y: 120
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -273,13 +268,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_12
+      name: HitSpriteBoy_12
       rect:
         serializedVersion: 2
-        x: 118
-        y: 121.2
-        width: 59.8
-        height: 59.8
+        x: 60
+        y: 60
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,13 +282,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_13
+      name: HitSpriteBoy_13
       rect:
         serializedVersion: 2
-        x: 177
-        y: 121.2
-        width: 59.8
-        height: 59.8
+        x: 120
+        y: 60
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -301,13 +296,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_14
+      name: HitSpriteBoy_14
       rect:
         serializedVersion: 2
-        x: 236
-        y: 121.2
-        width: 59.8
-        height: 59.8
+        x: 180
+        y: 60
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -315,13 +310,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_15
+      name: HitSpriteBoy_15
       rect:
         serializedVersion: 2
-        x: 0
-        y: 62.2
-        width: 59.8
-        height: 59.8
+        x: 240
+        y: 60
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -329,13 +324,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_16
+      name: HitSpriteBoy_16
       rect:
         serializedVersion: 2
-        x: 59
-        y: 62.2
-        width: 59.8
-        height: 59.8
+        x: 60
+        y: 0
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -343,13 +338,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_17
+      name: HitSpriteBoy_17
       rect:
         serializedVersion: 2
-        x: 118
-        y: 62.2
-        width: 59.8
-        height: 59.8
+        x: 120
+        y: 0
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -357,13 +352,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_18
+      name: HitSpriteBoy_18
       rect:
         serializedVersion: 2
-        x: 177
-        y: 62.2
-        width: 59.8
-        height: 59.8
+        x: 180
+        y: 0
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -371,83 +366,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_19
+      name: HitSpriteBoy_19
       rect:
         serializedVersion: 2
-        x: 236
-        y: 62.2
-        width: 59.8
-        height: 59.8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_20
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 3.2000008
-        width: 59.8
-        height: 59.8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_21
-      rect:
-        serializedVersion: 2
-        x: 59
-        y: 3.2000008
-        width: 59.8
-        height: 59.8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_22
-      rect:
-        serializedVersion: 2
-        x: 118
-        y: 3.2000008
-        width: 59.8
-        height: 59.8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_23
-      rect:
-        serializedVersion: 2
-        x: 177
-        y: 3.2000008
-        width: 59.8
-        height: 59.8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: RunSpriteBoy_Reverse_24
-      rect:
-        serializedVersion: 2
-        x: 236
-        y: 3.2000008
-        width: 59.8
-        height: 59.8
+        x: 240
+        y: 0
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

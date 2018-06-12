@@ -89,8 +89,9 @@ public class PlayerController : MonoBehaviour {
         //Fonction responsable du mouvement
 		MovePlayer (h1, v1, 1);
 		MovePlayer (h2, v2, 2);
+        animator.SetBool("Cac", true);
 
-		if (gettingHit) {
+            if (gettingHit) {
 			rigidBody.AddForce (forceHit, ForceMode.Impulse);
 			gettingHit = false;
 		}
@@ -101,9 +102,10 @@ public class PlayerController : MonoBehaviour {
 		if (player == ID) {
 			rigidBody.velocity = new Vector3 (h * maxSpeed, 0, v * maxSpeed);
 			SetBool_H_V (h, v, player);
-			//Si on veut utiliser un miroir avec les sprites il faut ces lignes de code
-			/*if ((h > 0 && facingRight) || (h < 0 && !facingRight)) {
+            //Si on veut utiliser un miroir avec les sprites il faut ces lignes de code
+            /*if ((h > 0 && facingRight) || (h < 0 && !facingRight)) {
 				Flip (player);
+                Debug.Log("Flip");
 			}*/
 		} 
 	}
@@ -193,6 +195,13 @@ public class PlayerController : MonoBehaviour {
 				Shot clone;
 				clone = GameObject.Instantiate<Shot> (shot, GetComponent<Transform> ().position, Quaternion.identity);
 				clone.Set (weapon [actualWeapon].GetID (),ID, h, v);
+                if (weapon[actualWeapon].Gettype() == "melee")
+                {
+                    animator.SetBool("Cac", true);
+                } else if (weapon[actualWeapon].Gettype() == "distance")
+                {
+                    animator.SetBool("Fire", true);
+                }
 			}
         }
 	}
@@ -289,6 +298,8 @@ public class PlayerController : MonoBehaviour {
 			h_direction = 1;
 			v_direction = -1;
 		}
-	}
+        animator.SetBool("Cac", false);
+        animator.SetBool("Fire", false);
+    }
 		
 }
