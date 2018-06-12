@@ -295,7 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 952431734}
   m_restart: {fileID: 781405024}
-  m_quit: {fileID: 0}
+  m_quit: {fileID: 1249346072}
   m_text: {fileID: 548444116}
 --- !u!1 &781405022
 GameObject:
