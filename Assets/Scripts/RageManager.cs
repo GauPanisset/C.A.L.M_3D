@@ -9,7 +9,9 @@ public class RageManager : MonoBehaviour
     public Image rage_2;
 	public Text rageValue_1;
 	public Text rageValue_2;
-    private float taux_rage_1;
+	public Text name_P1;
+	public Text name_P2;
+	private float taux_rage_1;
     private float taux_rage_2;
     private float maxrage = 100f;
 	private float rageDecay = 0.01f;
@@ -24,6 +26,8 @@ public class RageManager : MonoBehaviour
         taux_rage_2 = 0;
 		rageValue_1.text = "0 / 100";
 		rageValue_2.text = "0 / 100";
+		name_P1.text = gameController.GetNameP1 ();
+		name_P2.text = gameController.GetNameP2 ();
 
     }
 	

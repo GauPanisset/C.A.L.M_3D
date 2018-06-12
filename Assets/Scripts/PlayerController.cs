@@ -193,6 +193,7 @@ public class PlayerController : MonoBehaviour {
 				Shot clone;
 				clone = GameObject.Instantiate<Shot> (shot, GetComponent<Transform> ().position, Quaternion.identity);
 				clone.Set (weapon [actualWeapon].GetID (),ID, h, v);
+
 			}
         }
 	}

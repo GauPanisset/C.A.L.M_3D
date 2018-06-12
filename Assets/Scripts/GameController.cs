@@ -8,7 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
-	private int m_winner = 0;
+	private string m_winner = "";
+	private string name_P1 = "";
+	private string name_P2 = "";
 
 	// Use this for initialization
 	void Start () {
@@ -20,14 +22,21 @@ public class GameController : MonoBehaviour {
 		
 	}
 
-	public void StartGame() {
+	public void Option() {
 		DontDestroyOnLoad (this.gameObject);
 		SceneManager.LoadScene (1);
 	}
 
-	public void EndGame() {
+	public void StartGame(string Name1, string Name2) {
+		name_P1 = Name1;
+		name_P2 = Name2;
 		DontDestroyOnLoad (this.gameObject);
 		SceneManager.LoadScene (2);
+	}
+
+	public void EndGame() {
+		DontDestroyOnLoad (this.gameObject);
+		SceneManager.LoadScene (3);
 	}
 
 	public void RestartGame() {
@@ -39,15 +48,27 @@ public class GameController : MonoBehaviour {
 		Application.Quit();
 	}
 
-	public int GetWinner() {
+	public void newName(){
+		Debug.Log ("name");
+	}
+
+	public string GetWinner() {
 		return m_winner;
 	}
 
 	public void SetWinner(int looser) {
 		if (looser == 1) {
-			m_winner = 2;
+			m_winner = name_P2;
 		} else {
-			m_winner = 1;
+			m_winner = name_P1;
 		}
+	}
+
+	public string GetNameP1() {
+		return name_P1;
+	}
+
+	public string GetNameP2() {
+		return name_P2;
 	}
 }
