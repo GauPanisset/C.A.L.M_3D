@@ -26,9 +26,9 @@ public class RageManager : MonoBehaviour
         taux_rage_2 = 0;
 		rageValue_1.text = "0 / 100";
 		rageValue_2.text = "0 / 100";
-		name_P1.text = gameController.GetNameP1 ();
+		name_P1.text = gameController.GetName (1);
 		name_P1.text = name_P1.text.ToUpper ();
-		name_P2.text = gameController.GetNameP2 ();
+		name_P2.text = gameController.GetName (2);
 		name_P2.text = name_P2.text.ToUpper ();
     }
 	

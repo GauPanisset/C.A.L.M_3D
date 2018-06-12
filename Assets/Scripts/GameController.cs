@@ -64,11 +64,13 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	public string GetNameP1() {
-		return name_P1;
-	}
-
-	public string GetNameP2() {
-		return name_P2;
+	public string GetName(int ID) {
+		if (ID == 1) {
+			return name_P1;
+		} else if (ID == 2) {
+			return name_P2;
+		} else {
+			return "";
+		}
 	}
 }

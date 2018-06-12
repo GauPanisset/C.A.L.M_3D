@@ -24,7 +24,7 @@ public class MenuController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (input_P1.text.Length > 0) {
+		if (input_P1.text.Length > 0 && input_P2.text.Length > 0) {
 			m_start.interactable = true;
 		}
 	}

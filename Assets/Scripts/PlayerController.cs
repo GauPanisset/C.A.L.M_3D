@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour {
 	public int ID;
 	public Shot shot;
 	public WeaponGround weaponGround;
+	public TextMesh player_text;
 
     // Use this for initialization
     void Start () {
@@ -38,6 +40,8 @@ public class PlayerController : MonoBehaviour {
 
         ragemanager = GameObject.Find("Canvas").GetComponent<RageManager>();
 		gameController = GameObject.Find("GameController").GetComponent<GameController>();
+		player_text.text = "<"+gameController.GetName (ID)+">";
+		player_text.transform.position = GetComponent<Transform> ().position + new Vector3(-3f,4.5f,3f);
 	}
 	
 	// Update is called once per frame
@@ -100,6 +104,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (player == ID) {
 			rigidBody.velocity = new Vector3 (h * maxSpeed, 0, v * maxSpeed);
+
 			SetBool_H_V (h, v, player);
 			//Si on veut utiliser un miroir avec les sprites il faut ces lignes de code
 			/*if ((h > 0 && facingRight) || (h < 0 && !facingRight)) {
