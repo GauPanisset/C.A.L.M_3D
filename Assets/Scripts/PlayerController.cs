@@ -28,8 +28,7 @@ public class PlayerController : MonoBehaviour {
     public float dashSpeed;
     private float dashTime;
     public float startDashTime;
-    private bool dashEnable = true;
-    private float countdown = 2.0f;
+    private bool dash = true;
 
     // Use this for initialization
     void Start () {
@@ -83,8 +82,6 @@ public class PlayerController : MonoBehaviour {
 			}
 			DropWeapon (h,v,2);
 		}
-
-        countdown -= Time.deltaTime;
 	}
 
     private void FixedUpdate()
@@ -96,19 +93,36 @@ public class PlayerController : MonoBehaviour {
 		float h2 = Input.GetAxis("Horizontal_P2");
 		float v2 = Input.GetAxis ("Vertical_P2");
         //Fonction responsable du mouvement
-		MovePlayer (h1, v1, 1);
-		MovePlayer (h2, v2, 2);
 
-        if (Input.GetButton("Dash_P1") && ((h1 != 0) || (v1 != 0)))
-        {
-            DashPlayer(h_direction, v_direction, 1);
-        }
 
-        if (Input.GetButton("Dash_P2") && ((h2 != 0) || (v2 != 0)))
-        {
-            DashPlayer(h_direction, v_direction, 2);
-        }
+		if ((Input.GetButtonDown ("Dash_P1") || dash) && ID == 1) {
+			if (dashTime <= 0) {
+				dash = false;
+				dashTime = startDashTime;
+				rigidBody.velocity = Vector3.zero;
+			} else {
+				dashTime -= Time.deltaTime;
 
+				DashPlayer (h_direction, v_direction, 1);
+			}
+		} else {
+			MovePlayer (h1, v1, 1);
+		}
+
+		if ((Input.GetButtonDown ("Dash_P2") || dash) && ID == 2) {
+			if (dashTime <= 0) {
+				dash = false;
+				dashTime = startDashTime;
+				rigidBody.velocity = Vector3.zero;
+			} else {
+				dashTime -= Time.deltaTime;
+
+				DashPlayer (h_direction, v_direction, 2);
+			}
+		} else {
+			MovePlayer (h2, v2, 2);
+		}
+			
         if (gettingHit) {
 			rigidBody.AddForce (forceHit, ForceMode.Impulse);
 			gettingHit = false;
@@ -129,30 +143,10 @@ public class PlayerController : MonoBehaviour {
 
     private void DashPlayer(float h, float v, int player)
     {
-        if (ID == player)
-        {
-            if (dashTime <= 0)
-            {
-                dashTime = startDashTime;
-                rigidBody.velocity = Vector3.zero;
-            }
-            else if (dashEnable == true)
-            {
-                dashTime -= Time.deltaTime;
-                rigidBody.velocity = new Vector3(h * dashSpeed, 0, v * dashSpeed);
-                countdown = 2.0f;
-            }
-            if (countdown < 0)
-            {
-                dashEnable = true;
-            }
-            else
-            {
-                dashEnable = false;
-            }
-
-        }
-    
+		dash = true;
+		if (ID == player) {
+			rigidBody.velocity = new Vector3 (h * dashSpeed, 0, v * dashSpeed);
+		}
     }
 
     private void PutBool4Directions_False(int player) {
