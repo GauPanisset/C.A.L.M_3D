@@ -27,17 +27,25 @@ public class GameController : MonoBehaviour {
 
 		DontDestroyOnLoad (gameObject);
 	}
+		
 
 	// Use this for initialization
 	void Start () {
-		source_menu.Play ();
-		source_game.Play ();
-
+		
+		Reinitialisation ();
 	}
 
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	private void Reinitialisation() {
+		m_winner = "";
+		name_P1 = "";
+		name_P2 = "";
+		source_menu.volume = 1;
+		source_game.volume = 0;
 	}
 
 	public void Option() {
@@ -47,10 +55,9 @@ public class GameController : MonoBehaviour {
 	public void StartGame(string Name1, string Name2) {
 
 		startTime = Time.time;
-		IEnumerator coroutineOut = Fade_sound (-1, source_menu, 0.08f, 0f);
-		IEnumerator coroutineIn = Fade_sound (1, source_game, 0.08f, 1f);
-		StartCoroutine (coroutineIn);
-		StartCoroutine (coroutineOut);
+		IEnumerator coroutine = Transition_sound (source_game, source_menu, 0.5f, startTime + 0.5f, startTime);
+
+		StartCoroutine (coroutine);
 		name_P1 = Name1;
 		name_P2 = Name2;
 		SceneManager.LoadScene (2);
@@ -62,6 +69,7 @@ public class GameController : MonoBehaviour {
 
 	public void RestartGame() {
 		SceneManager.LoadScene (0);
+		Reinitialisation ();
 	}
 
 	public void QuitGame() {
@@ -94,10 +102,10 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	IEnumerator Fade_sound (int Direction, AudioSource audio, float fadeRate, float waitingTime) {
-		yield return new WaitForSeconds (waitingTime);
-		while (audio.volume != Mathf.Clamp01(1*Direction)) {
-			audio.volume = Mathf.Clamp01 (Mathf.Lerp (-1.0f * Direction, 1.0f * Direction, fadeRate * (Time.time - startTime)));
+	IEnumerator Transition_sound (AudioSource audioIn, AudioSource audioOut, float fadeRate, float startInTime, float startOutTime) {
+		while (audioOut.volume != 0 || audioIn.volume != 1) {
+			audioOut.volume = Mathf.Clamp01 (Mathf.Lerp (1.0f, 0.0f, fadeRate * (Time.time - startOutTime)));
+			audioIn.volume = Mathf.Clamp01 (Mathf.Lerp (0.0f, 1.0f, fadeRate * (Time.time - startInTime)));
 			yield return null;
 		} 
 	}
