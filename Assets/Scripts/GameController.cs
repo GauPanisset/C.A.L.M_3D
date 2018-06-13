@@ -11,37 +11,57 @@ public class GameController : MonoBehaviour {
 	private string m_winner = "";
 	private string name_P1 = "";
 	private string name_P2 = "";
+	private float startTime;
+
+	public static GameController instance = null;
+	public AudioSource source_menu;
+	public AudioSource source_game;
+
+	void Awake() {
+		if (instance == null) {
+			instance = this;
+		}
+		else if (instance != this) {
+			Destroy (gameObject);
+		}
+
+		DontDestroyOnLoad (gameObject);
+	}
 
 	// Use this for initialization
 	void Start () {
+		source_menu.Play ();
+		source_game.Play ();
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
 	public void Option() {
-		DontDestroyOnLoad (this.gameObject);
 		SceneManager.LoadScene (1);
 	}
 
 	public void StartGame(string Name1, string Name2) {
+
+		startTime = Time.time;
+		IEnumerator coroutineOut = Fade_sound (-1, source_menu, 0.08f, 0f);
+		IEnumerator coroutineIn = Fade_sound (1, source_game, 0.08f, 1f);
+		StartCoroutine (coroutineIn);
+		StartCoroutine (coroutineOut);
 		name_P1 = Name1;
 		name_P2 = Name2;
-		DontDestroyOnLoad (this.gameObject);
 		SceneManager.LoadScene (2);
 	}
 
 	public void EndGame() {
-		DontDestroyOnLoad (this.gameObject);
 		SceneManager.LoadScene (3);
 	}
 
 	public void RestartGame() {
 		SceneManager.LoadScene (0);
-		Destroy (gameObject);
 	}
 
 	public void QuitGame() {
@@ -72,5 +92,13 @@ public class GameController : MonoBehaviour {
 		} else {
 			return "";
 		}
+	}
+
+	IEnumerator Fade_sound (int Direction, AudioSource audio, float fadeRate, float waitingTime) {
+		yield return new WaitForSeconds (waitingTime);
+		while (audio.volume != Mathf.Clamp01(1*Direction)) {
+			audio.volume = Mathf.Clamp01 (Mathf.Lerp (-1.0f * Direction, 1.0f * Direction, fadeRate * (Time.time - startTime)));
+			yield return null;
+		} 
 	}
 }

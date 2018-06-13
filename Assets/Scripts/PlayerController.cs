@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour {
         ragemanager = GameObject.Find("Canvas").GetComponent<RageManager>();
 		gameController = GameObject.Find("GameController").GetComponent<GameController>();
 		player_text.text = "<"+gameController.GetName (ID)+">";
-		player_text.transform.position = GetComponent<Transform> ().position + new Vector3(-3f,4.5f,3f);
+		player_text.transform.position = GetComponent<Transform> ().position + new Vector3(0f,4f,1.5f);
 	}
 	
 	// Update is called once per frame
