@@ -11,8 +11,9 @@ public class PlayerController : MonoBehaviour {
 	private RageManager ragemanager;
 	private GameController gameController;
 	private SpriteRenderer sprite;
+    Color tmp;
 
-	private int h_direction;
+    private int h_direction;
 	private int v_direction = -1;
 	private int actualWeapon = 0;
 	private Vector3 forceHit;
@@ -32,13 +33,15 @@ public class PlayerController : MonoBehaviour {
 			weapon [i] = dataController.SearchID(0);
 		}
 
+
         rigidBody = GetComponent<Rigidbody>();
 		animator = GetComponentInChildren<Animator> ();
 		sprite = GetComponentInChildren<SpriteRenderer> ();
+        tmp = sprite.color;
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
 
         ragemanager = GameObject.Find("Canvas").GetComponent<RageManager>();
-		gameController = GameObject.Find("GameController").GetComponent<GameController>();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -89,7 +92,9 @@ public class PlayerController : MonoBehaviour {
         //Fonction responsable du mouvement
 		MovePlayer (h1, v1, 1);
 		MovePlayer (h2, v2, 2);
-        animator.SetBool("Cac", true);
+        EffetPlayer(1);
+        EffetPlayer(2);
+        
 
             if (gettingHit) {
 			rigidBody.AddForce (forceHit, ForceMode.Impulse);
@@ -185,7 +190,7 @@ public class PlayerController : MonoBehaviour {
                 animator.SetBool("Move", true);
             }
 		}
-	}
+    }
 
 	private void Fire(int h, int v, int player){
 
@@ -301,5 +306,38 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("Cac", false);
         animator.SetBool("Fire", false);
     }
-		
+
+    private void EffetPlayer(int player)
+    {
+
+        if (gettingHit)
+        {
+            Disparition(player);
+        }
+        /*else
+        {
+            EffetRage(player);
+        }*/
+
+        Debug.Log(tmp);
+    }
+
+    private void Disparition(int player) {
+        tmp.a = 0f;
+        sprite.color = tmp;
+    }
+
+    /*private void Reapparition(int player) {
+        tmp = new Vector4 (255f,255f,255f,255f);
+        sprite.color = tmp;
+    }*/
+
+    private void EffetRage(int player){
+        float rage = ragemanager.GetRage(player);
+        rage = rage / 100f * 255f;
+        tmp = new Vector4(255f, 255f - rage, 255f - rage, 255f);
+        Debug.Log(tmp);
+        sprite.color = tmp;
+    }
+
 }

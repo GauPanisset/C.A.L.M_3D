@@ -74,4 +74,13 @@ public class RageManager : MonoBehaviour
 
 	}
 
+    public float GetRage(int ID) {
+        if (ID == 1){
+            return taux_rage_1;
+        }   
+        else {
+            return taux_rage_2;
+        }
+    }
+    
 }

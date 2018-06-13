@@ -1979,6 +1979,16 @@ Prefab:
       value: 
       objectReference: {fileID: 22100000, guid: ee9b02cd0a618a340a341f2b674e3409,
         type: 2}
+    - target: {fileID: 95866706141400268, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
+        type: 2}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95866706141400268, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
+        type: 2}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa, type: 2}
   m_IsPrefabParent: 0
@@ -10839,6 +10849,11 @@ Prefab:
     - target: {fileID: 212818703933008510, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
         type: 2}
       propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212818703933008510, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
+        type: 2}
+      propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
