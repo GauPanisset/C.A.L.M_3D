@@ -10,6 +10,7 @@ GameObject:
   - component: {fileID: 420958}
   - component: {fileID: 3379194}
   - component: {fileID: 2336276}
+  - component: {fileID: 65143709267323030}
   m_Layer: 0
   m_Name: Couch_3
   m_TagString: Untagged
@@ -24,8 +25,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127242}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -12.23, y: 0.001, z: -3.79}
-  m_LocalScale: {x: 78, y: 78.00001, z: 78.00001}
+  m_LocalPosition: {x: -27.00344, y: 0.014482552, z: 14.052921}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -82,3 +83,15 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 127242}
   m_IsPrefabParent: 1
+--- !u!65 &65143709267323030
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127242}
+  m_Material: {fileID: 13400000, guid: d815c27cb3a44ce41bbb3d4b30025cb2, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06544425, y: 0.028791895, z: 0.024232272}
+  m_Center: {x: 0, y: 0.0011366021, z: 0.011943284}
