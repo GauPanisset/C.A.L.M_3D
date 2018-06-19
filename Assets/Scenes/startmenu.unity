@@ -988,6 +988,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source_menu: {fileID: 272658462}
   source_game: {fileID: 1963432463}
+  Blackscreen: {fileID: 1195637947616588, guid: 837d47ea0a2e9a443b87729c6deebbce,
+    type: 2}
 --- !u!1 &1963432461
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour {
 	public static GameController instance = null;
 	public AudioSource source_menu;
 	public AudioSource source_game;
+	public GameObject Blackscreen;
 
 	void Awake() {
 		if (instance == null) {
@@ -56,6 +57,9 @@ public class GameController : MonoBehaviour {
 
 		startTime = Time.time;
 		IEnumerator coroutine = Transition_sound (source_game, source_menu, 0.5f, startTime + 0.5f, startTime);
+
+		GameObject clone;
+		clone = GameObject.Instantiate<GameObject> (Blackscreen, GetComponent<Transform> ().position, Quaternion.identity);
 
 		StartCoroutine (coroutine);
 		name_P1 = Name1;
@@ -104,8 +108,8 @@ public class GameController : MonoBehaviour {
 
 	IEnumerator Transition_sound (AudioSource audioIn, AudioSource audioOut, float fadeRate, float startInTime, float startOutTime) {
 		while (audioOut.volume != 0 || audioIn.volume != 1) {
-			audioOut.volume = Mathf.Clamp01 (Mathf.Lerp (1.0f, 0.0f, fadeRate * (Time.time - startOutTime)));
-			audioIn.volume = Mathf.Clamp01 (Mathf.Lerp (0.0f, 1.0f, fadeRate * (Time.time - startInTime)));
+			audioOut.volume = Mathf.Lerp (1.0f, 0.0f, fadeRate * (Time.time - startOutTime));
+			audioIn.volume = Mathf.Lerp (0.0f, 1.0f, fadeRate * (Time.time - startInTime));
 			yield return null;
 		} 
 	}
