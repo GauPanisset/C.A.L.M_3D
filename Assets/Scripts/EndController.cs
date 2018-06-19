@@ -16,8 +16,8 @@ public class EndController : MonoBehaviour {
 	void Start () {
 		
 		gameController = GameObject.Find("GameController").GetComponent<GameController>();
-		m_text.text = "Le joueur " + gameController.GetWinner () + " a gagné !";
-		m_restart.onClick.AddListener (() => {gameController.Restart ();});
+		m_text.text = gameController.GetWinner () + " wins !";
+		m_restart.onClick.AddListener (() => {gameController.RestartGame ();});
 		m_quit.onClick.AddListener (() => {gameController.QuitGame();});
 	}
 	
