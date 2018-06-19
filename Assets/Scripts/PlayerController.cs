@@ -26,9 +26,9 @@ public class PlayerController : MonoBehaviour {
 	public WeaponGround weaponGround;
 	public TextMesh player_text;
 
-    public float dashSpeed;
+    private float dashSpeed = 100;
     private float dashTime;
-    public float startDashTime;
+    public float dashLength;
     private bool dash = true;
 
     // Use this for initialization
@@ -98,30 +98,16 @@ public class PlayerController : MonoBehaviour {
         //Fonction responsable du mouvement
 
 
-		if ((Input.GetButtonDown ("Dash_P1") || dash) && ID == 1) {
-			if (dashTime <= 0) {
-				dash = false;
-				dashTime = startDashTime;
-				rigidBody.velocity = Vector3.zero;
-			} else {
-				dashTime -= Time.deltaTime;
-
+		if (Input.GetButtonDown ("Dash_P1") || dash) {
 				DashPlayer (h_direction, v_direction, 1);
-			}
+	
 		} else {
 			MovePlayer (h1, v1, 1);
 		}
 
-		if ((Input.GetButtonDown ("Dash_P2") || dash) && ID == 2) {
-			if (dashTime <= 0) {
-				dash = false;
-				dashTime = startDashTime;
-				rigidBody.velocity = Vector3.zero;
-			} else {
-				dashTime -= Time.deltaTime;
+		if (Input.GetButtonDown ("Dash_P2") || dash) {
+			DashPlayer (h_direction, v_direction, 2);
 
-				DashPlayer (h_direction, v_direction, 2);
-			}
 		} else {
 			MovePlayer (h2, v2, 2);
 		}
@@ -146,10 +132,19 @@ public class PlayerController : MonoBehaviour {
 
     private void DashPlayer(float h, float v, int player)
     {
-		dash = true;
-		if (ID == player) {
-			rigidBody.velocity = new Vector3 (h * dashSpeed, 0, v * dashSpeed);
+		if (dashTime <= 0) {
+			dash = false;
+			dashTime = dashLength/dashSpeed;
+			rigidBody.velocity = Vector3.zero;
+		} else {
+			dashTime -= Time.deltaTime;
+
+			dash = true;
+			if (ID == player) {
+				rigidBody.velocity = new Vector3 (h * dashSpeed, 0, v * dashSpeed);
+			}
 		}
+
     }
 
     private void PutBool4Directions_False(int player) {
