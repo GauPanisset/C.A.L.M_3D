@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour {
 	public int ID;
 	public Shot shot;
 	public WeaponGround weaponGround;
+	public TextMesh player_text;
 
     public float dashSpeed;
     private float dashTime;
@@ -43,6 +44,8 @@ public class PlayerController : MonoBehaviour {
 
         ragemanager = GameObject.Find("Canvas").GetComponent<RageManager>();
 		gameController = GameObject.Find("GameController").GetComponent<GameController>();
+		player_text.text = "<"+gameController.GetName (ID)+">";
+		player_text.transform.position = GetComponent<Transform> ().position + new Vector3(0f,4f,1.5f);
 	}
 	
 	// Update is called once per frame
