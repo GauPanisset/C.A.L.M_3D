@@ -26,10 +26,11 @@ public class PlayerController : MonoBehaviour {
 	public WeaponGround weaponGround;
 	public TextMesh player_text;
 
-    private float dashSpeed = 100;
+    private float dashSpeed = 300;
     private float dashTime;
     public float dashLength;
-    private bool dash = true;
+    private float nextDash = 0;
+	private float dashRate = 1.5f;
 
     // Use this for initialization
     void Start () {
@@ -98,21 +99,28 @@ public class PlayerController : MonoBehaviour {
         //Fonction responsable du mouvement
 
 
-		if (Input.GetButtonDown ("Dash_P1") || dash) {
-				DashPlayer (h_direction, v_direction, 1);
-	
+		if (Input.GetButtonDown ("Dash_P1") && Time.time > nextDash) {
+			IEnumerator coroutine = Dash_Player (h_direction, v_direction, 1, Time.time);
+			StartCoroutine (coroutine);
 		} else {
 			MovePlayer (h1, v1, 1);
 		}
+			
+			
+        if (gettingHit) {
+			rigidBody.AddForce (forceHit, ForceMode.Impulse);
+			gettingHit = false;
+		}
 
-		if (Input.GetButtonDown ("Dash_P2") || dash) {
-			DashPlayer (h_direction, v_direction, 2);
-
+		if (Input.GetButtonDown ("Dash_P2") && Time.time > nextDash) {
+			IEnumerator coroutine = Dash_Player (h_direction, v_direction, 2, Time.time);
+			StartCoroutine (coroutine);
 		} else {
 			MovePlayer (h2, v2, 2);
 		}
-			
-        if (gettingHit) {
+
+
+		if (gettingHit) {
 			rigidBody.AddForce (forceHit, ForceMode.Impulse);
 			gettingHit = false;
 		}
@@ -130,16 +138,26 @@ public class PlayerController : MonoBehaviour {
 		} 
 	}
 
+	IEnumerator Dash_Player (float h, float v, int player, float startTime) {
+		if (ID == player) {
+			nextDash = Time.time + dashRate;
+			dashTime = dashLength / dashSpeed;
+
+			while (Time.time < startTime + dashTime) {
+				rigidBody.velocity = new Vector3 (h * dashSpeed, 0, v * dashSpeed);
+				yield return null;
+			} 
+		}
+	}
+
     private void DashPlayer(float h, float v, int player)
     {
 		if (dashTime <= 0) {
-			dash = false;
+			nextDash = dashRate + Time.time;
 			dashTime = dashLength/dashSpeed;
 			rigidBody.velocity = Vector3.zero;
 		} else {
 			dashTime -= Time.deltaTime;
-
-			dash = true;
 			if (ID == player) {
 				rigidBody.velocity = new Vector3 (h * dashSpeed, 0, v * dashSpeed);
 			}
