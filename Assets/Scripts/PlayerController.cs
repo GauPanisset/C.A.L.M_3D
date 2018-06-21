@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour {
 		sprite = GetComponentInChildren<SpriteRenderer> ();
 
         ragemanager = GameObject.Find("Canvas").GetComponent<RageManager>();
+		ragemanager.SetNameWeapon (weapon[actualWeapon].Getname(),ID);
 		gameController = GameObject.Find("GameController").GetComponent<GameController>();
 		player_text.text = "<"+gameController.GetName (ID)+">";
 		player_text.transform.position = GetComponent<Transform> ().position + new Vector3(0f,4f,1.5f);
@@ -246,6 +247,7 @@ public class PlayerController : MonoBehaviour {
 			} else {
 				actualWeapon = 0;
 			}
+			ragemanager.SetNameWeapon (weapon[actualWeapon].Getname(),ID);
 		}
 	}
 
@@ -264,6 +266,7 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			weapon[1-actualWeapon] = dataController.SearchID(ID);
 		}
+		ragemanager.SetNameWeapon (weapon[actualWeapon].Getname(),ID);
 	}
 
 	private void DropWeapon(int h, int v, int player)
@@ -276,6 +279,7 @@ public class PlayerController : MonoBehaviour {
 				clone.SetCreated (h,v);
 
 				weapon [actualWeapon] = dataController.SearchID (0);
+				ragemanager.SetNameWeapon (weapon[actualWeapon].Getname(),ID);
 			}
 		}
 	}

@@ -45,8 +45,11 @@ public class GameController : MonoBehaviour {
 		m_winner = "";
 		name_P1 = "";
 		name_P2 = "";
-		source_menu.volume = 1;
-		source_game.volume = 0;
+
+		startTime = Time.time;
+		IEnumerator coroutine = Softstart_sound (source_menu, 0.5f, startTime);
+		StartCoroutine (coroutine);
+		source_game.Stop ();
 	}
 
 	public void Option() {
@@ -107,9 +110,21 @@ public class GameController : MonoBehaviour {
 	}
 
 	IEnumerator Transition_sound (AudioSource audioIn, AudioSource audioOut, float fadeRate, float startInTime, float startOutTime) {
+		audioIn.Play ();
+		audioIn.volume = 0;
 		while (audioOut.volume != 0 || audioIn.volume != 1) {
 			audioOut.volume = Mathf.Lerp (1.0f, 0.0f, fadeRate * (Time.time - startOutTime));
 			audioIn.volume = Mathf.Lerp (0.0f, 1.0f, fadeRate * (Time.time - startInTime));
+			yield return null;
+		} 
+		audioOut.Stop ();
+	}
+
+	IEnumerator Softstart_sound (AudioSource audio, float fadeRate, float startInTime) {
+		audio.Play ();
+		audio.volume = 0;
+		while (audio.volume != 1) {
+			audio.volume = Mathf.Lerp (0.0f, 1.0f, fadeRate * (Time.time - startInTime));
 			yield return null;
 		} 
 	}

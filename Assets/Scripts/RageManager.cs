@@ -11,6 +11,8 @@ public class RageManager : MonoBehaviour
 	public Text rageValue_2;
 	public Text name_P1;
 	public Text name_P2;
+	public Text nameWeapon_P1;
+	public Text nameWeapon_P2;
     private float taux_rage_1;
     private float taux_rage_2;
     private float maxrage = 100f;
@@ -78,6 +80,14 @@ public class RageManager : MonoBehaviour
 		gameController.SetWinner (ID);
 		gameController.EndGame ();
 
+	}
+
+	public void SetNameWeapon(string name, int id) {
+		if (id == 1) {
+			nameWeapon_P1.text = name;
+		} else {
+			nameWeapon_P2.text = name;
+		}
 	}
 
 }
