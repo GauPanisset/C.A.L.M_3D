@@ -529,7 +529,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh38868
+  m_Name: pb_Mesh36392
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -1078,7 +1078,7 @@ Prefab:
         type: 2}
       propertyPath: shot
       value: 
-      objectReference: {fileID: 114733523523546876, guid: 53620d7305bc1d6488ff6b839e120849,
+      objectReference: {fileID: 114733523523546876, guid: 6267faa84beb9d44f8e3d650dec18c66,
         type: 2}
     - target: {fileID: 1327532765505610, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa, type: 2}
       propertyPath: m_TagString
@@ -2383,7 +2383,7 @@ GameObject:
   - component: {fileID: 353871419}
   - component: {fileID: 353871418}
   - component: {fileID: 353871417}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: right_alley_grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2768,7 +2768,7 @@ GameObject:
   - component: {fileID: 388100897}
   - component: {fileID: 388100896}
   - component: {fileID: 388100895}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: left_alley_grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3661,7 +3661,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh55176
+  m_Name: pb_Mesh36538
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -3791,7 +3791,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh41282
+  m_Name: pb_Mesh36016
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -5529,7 +5529,7 @@ GameObject:
   - component: {fileID: 894367896}
   - component: {fileID: 894367895}
   - component: {fileID: 894367894}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: left_floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6142,31 +6142,31 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4306104067486400, guid: dec8687b9f68b2b4a9f5b2145b29124f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.7422562
+      value: 4.963
       objectReference: {fileID: 0}
     - target: {fileID: 4306104067486400, guid: dec8687b9f68b2b4a9f5b2145b29124f, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -23.08
+      value: -21.794
       objectReference: {fileID: 0}
     - target: {fileID: 4306104067486400, guid: dec8687b9f68b2b4a9f5b2145b29124f, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 48.594666
+      value: 46.695
       objectReference: {fileID: 0}
     - target: {fileID: 4306104067486400, guid: dec8687b9f68b2b4a9f5b2145b29124f, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.30070576
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4306104067486400, guid: dec8687b9f68b2b4a9f5b2145b29124f, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4306104067486400, guid: dec8687b9f68b2b4a9f5b2145b29124f, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4306104067486400, guid: dec8687b9f68b2b4a9f5b2145b29124f, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.953717
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4306104067486400, guid: dec8687b9f68b2b4a9f5b2145b29124f, type: 2}
       propertyPath: m_RootOrder
@@ -6175,33 +6175,6 @@ Prefab:
     - target: {fileID: 1192206374469892, guid: dec8687b9f68b2b4a9f5b2145b29124f, type: 2}
       propertyPath: m_Name
       value: weapon
-      objectReference: {fileID: 0}
-    - target: {fileID: 114924298962510052, guid: dec8687b9f68b2b4a9f5b2145b29124f,
-        type: 2}
-      propertyPath: ID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4306104067486400, guid: dec8687b9f68b2b4a9f5b2145b29124f, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 54727279898925834, guid: dec8687b9f68b2b4a9f5b2145b29124f,
-        type: 2}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 54727279898925834, guid: dec8687b9f68b2b4a9f5b2145b29124f,
-        type: 2}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4306104067486400, guid: dec8687b9f68b2b4a9f5b2145b29124f, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4306104067486400, guid: dec8687b9f68b2b4a9f5b2145b29124f, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dec8687b9f68b2b4a9f5b2145b29124f, type: 2}
@@ -7399,7 +7372,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh38948
+  m_Name: pb_Mesh36474
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -10912,7 +10885,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh38638
+  m_Name: pb_Mesh36128
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -11805,7 +11778,7 @@ GameObject:
   - component: {fileID: 1606436373}
   - component: {fileID: 1606436372}
   - component: {fileID: 1606436371}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bedroom_floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12720,7 +12693,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh41296
+  m_Name: pb_Mesh36030
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -14096,7 +14069,7 @@ GameObject:
   - component: {fileID: 1922762892}
   - component: {fileID: 1922762891}
   - component: {fileID: 1922762890}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: top_right_floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15611,6 +15584,12 @@ Prefab:
       propertyPath: dashLength
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 114902541064136226, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
+        type: 2}
+      propertyPath: shot
+      value: 
+      objectReference: {fileID: 114733523523546876, guid: 6267faa84beb9d44f8e3d650dec18c66,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa, type: 2}
   m_IsPrefabParent: 0
@@ -15627,7 +15606,7 @@ GameObject:
   - component: {fileID: 2139719534}
   - component: {fileID: 2139719533}
   - component: {fileID: 2139719532}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: top_grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}

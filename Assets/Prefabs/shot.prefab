@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f53dc6e930cce247b44f7b7e6832b7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 82525570310807936, guid: cbeb691d7a28d364e877c18dded15d2b, type: 2}
+  sound: {fileID: 114055595169943136, guid: aa0f7c9542ff18b4793b0e9049b5328c, type: 2}
 --- !u!114 &114733523523546876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01300c65ff744a2408ba949a8f56d8ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 114055595169943136, guid: aa0f7c9542ff18b4793b0e9049b5328c, type: 2}
 --- !u!136 &136472918977470682
 CapsuleCollider:
   m_ObjectHideFlags: 1

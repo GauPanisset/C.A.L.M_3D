@@ -118,8 +118,7 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			MovePlayer (h2, v2, 2);
 		}
-
-
+			
 		if (gettingHit) {
 			rigidBody.AddForce (forceHit, ForceMode.Impulse);
 			gettingHit = false;
@@ -149,21 +148,6 @@ public class PlayerController : MonoBehaviour {
 			} 
 		}
 	}
-
-    private void DashPlayer(float h, float v, int player)
-    {
-		if (dashTime <= 0) {
-			nextDash = dashRate + Time.time;
-			dashTime = dashLength/dashSpeed;
-			rigidBody.velocity = Vector3.zero;
-		} else {
-			dashTime -= Time.deltaTime;
-			if (ID == player) {
-				rigidBody.velocity = new Vector3 (h * dashSpeed, 0, v * dashSpeed);
-			}
-		}
-
-    }
 
     private void PutBool4Directions_False(int player) {
         if (player == ID) {

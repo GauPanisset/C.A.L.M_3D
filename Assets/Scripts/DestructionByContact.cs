@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class DestructionByContact : MonoBehaviour {
 
+	public SoundController sound;
+
 	//public AudioSource audio;
 
 	void OnTriggerEnter(Collider other){
 		if (other.gameObject.tag == "Obstacle") {
-			Destroy (gameObject);
+			Explosion ();
 		}
 		if (other.gameObject.tag == "Player") {
 			PlayerController playerController = other.GetComponentInParent<PlayerController> ();
@@ -19,7 +21,7 @@ public class DestructionByContact : MonoBehaviour {
 				RageManager ragemanager = GameObject.Find("Canvas").GetComponent<RageManager>();
 
 				playerController.GetHit (direction, shot.GetID ());
-				Destroy (gameObject);
+				Explosion ();
 				ragemanager.AddRage(shot.GetID(),shot.GetSource ());
 			}
 		}
@@ -27,8 +29,17 @@ public class DestructionByContact : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D other){
 		if (other.gameObject.tag == "Map") {
-			Destroy (gameObject);
+			Explosion ();
 		}
+	}
+
+	private void Explosion () {
+		AudioClip audioEx = GetComponentInParent<Shot> ().GetAudio ();
+		if (audioEx != null) {
+			SoundController clone = GameObject.Instantiate<SoundController> (sound, GetComponent<Transform> ().position, Quaternion.identity);
+			clone.SetAudio (audioEx);
+		}
+		Destroy (gameObject);
 	}
 		
 }

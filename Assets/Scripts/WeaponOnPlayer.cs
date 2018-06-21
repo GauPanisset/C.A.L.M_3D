@@ -16,6 +16,8 @@ public class WeaponOnPlayer{
 	[SerializeField] private int m_idSprWeapon = 0;
 	[SerializeField] private string m_pathSprShot = null;
 	[SerializeField] private int m_idSprShot = 0;
+	[SerializeField] private string m_pathSndEx = null;
+	[SerializeField] private string m_pathSndSht = null;
 	[SerializeField] private string m_type = null;
 
 	public int GetID(){
@@ -56,6 +58,14 @@ public class WeaponOnPlayer{
 
 	public int GetidSprShot(){
 		return m_idSprShot;
+	}
+
+	public string GetpathSndEx(){
+		return m_pathSndEx;
+	}
+
+	public string GetpathSndSht(){
+		return m_pathSndSht;
 	}
 
 	public string Gettype(){
