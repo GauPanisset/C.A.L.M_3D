@@ -13,6 +13,8 @@ public class RageManager : MonoBehaviour
 	public Text name_P2;
 	public Text nameWeapon_P1;
 	public Text nameWeapon_P2;
+	public Image imageWeapon_P1;
+	public Image imageWeapon_P2;
     private float taux_rage_1;
     private float taux_rage_2;
     private float maxrage = 100f;
@@ -82,11 +84,13 @@ public class RageManager : MonoBehaviour
 
 	}
 
-	public void SetNameWeapon(string name, int id) {
+	public void SetWeapon(string name, string pathSpr, int idSpr, int id) {
 		if (id == 1) {
 			nameWeapon_P1.text = name;
+			imageWeapon_P1.sprite = Resources.LoadAll<Sprite> ( pathSpr)[idSpr];
 		} else {
 			nameWeapon_P2.text = name;
+			imageWeapon_P2.sprite = Resources.LoadAll<Sprite> ( pathSpr)[idSpr];
 		}
 	}
 
