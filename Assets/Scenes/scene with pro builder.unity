@@ -1162,6 +1162,33 @@ Prefab:
       propertyPath: dashLength
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 95866706141400268, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: a06211af5f22e604186a0bae1a2bde1b,
+        type: 2}
+    - target: {fileID: 212818703933008510, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300008, guid: 0c87d8b02f326c846b0b7083765e2518,
+        type: 3}
+    - target: {fileID: 212818703933008510, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 212818703933008510, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 212818703933008510, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa, type: 2}
   m_IsPrefabParent: 0
@@ -15945,6 +15972,27 @@ Prefab:
       value: 
       objectReference: {fileID: 114733523523546876, guid: 6267faa84beb9d44f8e3d650dec18c66,
         type: 2}
+    - target: {fileID: 212818703933008510, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300008, guid: ab320c25ddd8aaf47b5836a7eea150e8,
+        type: 3}
+    - target: {fileID: 212818703933008510, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 212818703933008510, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 212818703933008510, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c7678a46fe99ed4fbbd73be7bfc78fa, type: 2}
   m_IsPrefabParent: 0

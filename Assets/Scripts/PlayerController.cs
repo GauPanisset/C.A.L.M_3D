@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	private RageManager ragemanager;
 	private GameController gameController;
 	private SpriteRenderer sprite;
+	private Color tmp;
 
 	private int h_direction;
 	private int v_direction = -1;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour {
         rigidBody = GetComponent<Rigidbody>();
 		animator = GetComponentInChildren<Animator> ();
 		sprite = GetComponentInChildren<SpriteRenderer> ();
+		tmp = sprite.color;
 
         ragemanager = GameObject.Find("Canvas").GetComponent<RageManager>();
 		ragemanager.SetWeapon (weapon[actualWeapon].Getname(), weapon[actualWeapon].GetpathSprWeapon(), weapon[actualWeapon].GetidSprWeapon(),ID);
@@ -107,12 +109,6 @@ public class PlayerController : MonoBehaviour {
 			MovePlayer (h1, v1, 1);
 		}
 			
-			
-        if (gettingHit) {
-			rigidBody.AddForce (forceHit, ForceMode.Impulse);
-			gettingHit = false;
-		}
-
 		if (Input.GetButtonDown ("Dash_P2") && Time.time > nextDash) {
 			IEnumerator coroutine = Dash_Player (h_direction, v_direction, 2, Time.time);
 			StartCoroutine (coroutine);
@@ -235,6 +231,13 @@ public class PlayerController : MonoBehaviour {
 				Shot clone;
 				clone = GameObject.Instantiate<Shot> (shot, GetComponent<Transform> ().position, Quaternion.identity);
 				clone.Set (weapon [actualWeapon].GetID (),ID, h, v);
+				if (weapon[actualWeapon].Gettype() == "melee")
+				{
+					animator.SetBool("Cac", true);
+				} else if (weapon[actualWeapon].Gettype() == "distance")
+				{
+					animator.SetBool("Fire", true);
+				}
 			}
         }
 	}
@@ -332,6 +335,8 @@ public class PlayerController : MonoBehaviour {
 			h_direction = 1;
 			v_direction = -1;
 		}
+		animator.SetBool("Cac", false);
+		animator.SetBool("Fire", false);
 	}
 		
 }
