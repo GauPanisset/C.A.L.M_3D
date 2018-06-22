@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour {
 			
 		if (gettingHit) {
 			rigidBody.AddForce (forceHit, ForceMode.Impulse);
+			EffetRage (ID);
 			gettingHit = false;
 		}
     }
@@ -337,6 +338,14 @@ public class PlayerController : MonoBehaviour {
 		}
 		animator.SetBool("Cac", false);
 		animator.SetBool("Fire", false);
+	}
+
+	private void EffetRage(int player){
+		float rage = ragemanager.GetRage(player);
+		rage = rage / 100f * 255f;
+		tmp = new Vector4(255f, 255f - rage, 255f - rage, 255f);
+		Debug.Log(tmp);
+		sprite.color = tmp;
 	}
 		
 }
