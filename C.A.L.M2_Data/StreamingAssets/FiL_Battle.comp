@@ -1,0 +1,8 @@
+version: 1.0
+topics:
+- name: NewBox
+  comet: Box
+  in: true
+- name: Boxes
+  comet: Box
+  out: true

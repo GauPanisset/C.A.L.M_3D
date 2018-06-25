@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Linq;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -16,9 +17,12 @@ public class GameController : MonoBehaviour {
 	public static GameController instance = null;
 	public AudioSource source_menu;
 	public AudioSource source_game;
-	public GameObject Blackscreen;
+	public AudioClip source_fight;
+	public SoundController sound;
 
 	void Awake() {
+		DataController.Read ();
+			Cursor.visible = false;
 		if (instance == null) {
 			instance = this;
 		}
@@ -38,7 +42,9 @@ public class GameController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
+		if (InputManager.Cancel()) {
+			RestartGame();
+		}
 	}
 
 	private void Reinitialisation() {
@@ -59,15 +65,17 @@ public class GameController : MonoBehaviour {
 	public void StartGame(string Name1, string Name2) {
 
 		startTime = Time.time;
-		IEnumerator coroutine = Transition_sound (source_game, source_menu, 0.5f, startTime + 0.5f, startTime);
-
-		GameObject clone;
-		clone = GameObject.Instantiate<GameObject> (Blackscreen, GetComponent<Transform> ().position, Quaternion.identity);
+		IEnumerator coroutine = Transition_sound (source_game, source_menu, 0.5f, startTime + 1f, startTime);
+		IEnumerator coroutine2 = Delay_sound (source_fight, 1f);
 
 		StartCoroutine (coroutine);
+		StartCoroutine (coroutine2);
 		name_P1 = Name1;
 		name_P2 = Name2;
 		SceneManager.LoadScene (2);
+		IEnumerator coroutine3 = Screen_launch();
+		StartCoroutine (coroutine3);
+
 	}
 
 	public void EndGame() {
@@ -111,10 +119,10 @@ public class GameController : MonoBehaviour {
 
 	IEnumerator Transition_sound (AudioSource audioIn, AudioSource audioOut, float fadeRate, float startInTime, float startOutTime) {
 		audioIn.Play ();
-		audioIn.volume = 0;
-		while (audioOut.volume != 0 || audioIn.volume != 1) {
-			audioOut.volume = Mathf.Lerp (1.0f, 0.0f, fadeRate * (Time.time - startOutTime));
-			audioIn.volume = Mathf.Lerp (0.0f, 1.0f, fadeRate * (Time.time - startInTime));
+		audioIn.volume = 0f;
+		while (audioOut.volume != 0f || audioIn.volume != 0.5f) {
+			audioOut.volume = Mathf.Lerp (0.5f, 0.0f, fadeRate * (Time.time - startOutTime));
+			audioIn.volume = Mathf.Lerp (0.0f, 0.5f, fadeRate * (Time.time - startInTime));
 			yield return null;
 		} 
 		audioOut.Stop ();
@@ -123,9 +131,25 @@ public class GameController : MonoBehaviour {
 	IEnumerator Softstart_sound (AudioSource audio, float fadeRate, float startInTime) {
 		audio.Play ();
 		audio.volume = 0;
-		while (audio.volume != 1) {
-			audio.volume = Mathf.Lerp (0.0f, 1.0f, fadeRate * (Time.time - startInTime));
+		while (audio.volume != 0.5f) {
+			audio.volume = Mathf.Lerp (0.0f, 0.5f, fadeRate * (Time.time - startInTime));
 			yield return null;
 		} 
+	}
+
+	IEnumerator Delay_sound (AudioClip audio, float delayTime) {
+		yield return new WaitForSeconds (delayTime);
+		if (audio != null) {
+			SoundController clone = GameObject.Instantiate<SoundController> (sound, GetComponent<Transform> ().position, Quaternion.identity);
+			clone.SetAudio (audio);
+		}
+		yield return null;
+	}
+
+	IEnumerator Screen_launch () {
+		yield return new WaitForSeconds (1f);
+
+		RageManager rageManager = GameObject.Find("Canvas").GetComponent<RageManager>();
+		rageManager.Sceen ();
 	}
 }

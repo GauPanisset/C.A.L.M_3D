@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	private DataController dataController = new DataController ();
 	private WeaponOnPlayer[] weapon = new WeaponOnPlayer[2];
 	private Rigidbody rigidBody;
 	private Animator animator;
 	private RageManager ragemanager;
 	private GameController gameController;
 	private SpriteRenderer sprite;
-	private Color tmp;
+	private Color colorS;
 
 	private int h_direction;
 	private int v_direction = -1;
 	private int actualWeapon = 0;
 	private Vector3 forceHit;
 	private float nextFire;
-	private bool facingRight = false;
 	private bool gettingHit = false;
+	private bool dashing=false;
 
     public float maxSpeed = 5.0f;
 	public int ID;
@@ -27,7 +26,7 @@ public class PlayerController : MonoBehaviour {
 	public WeaponGround weaponGround;
 	public TextMesh player_text;
 
-    private float dashSpeed = 300;
+    private float dashSpeed = 80;
     private float dashTime;
     public float dashLength;
     private float nextDash = 0;
@@ -37,19 +36,19 @@ public class PlayerController : MonoBehaviour {
     void Start () {
 
 		for (int i=0;i<2;i++){
-			weapon [i] = dataController.SearchID(0);
+			weapon [i] = DataController.SearchID(0);
 		}
 
         rigidBody = GetComponent<Rigidbody>();
 		animator = GetComponentInChildren<Animator> ();
 		sprite = GetComponentInChildren<SpriteRenderer> ();
-		tmp = sprite.color;
+		colorS = sprite.color;
 
         ragemanager = GameObject.Find("Canvas").GetComponent<RageManager>();
 		ragemanager.SetWeapon (weapon[actualWeapon].Getname(), weapon[actualWeapon].GetpathSprWeapon(), weapon[actualWeapon].GetidSprWeapon(),ID);
 		gameController = GameObject.Find("GameController").GetComponent<GameController>();
 		player_text.text = "<"+gameController.GetName (ID)+">";
-		player_text.transform.position = GetComponent<Transform> ().position + new Vector3(0f,4f,1.5f);
+		player_text.transform.position = GetComponent<Transform> ().position + new Vector3(0f,3f,1.5f);
 	}
 	
 	// Update is called once per frame
@@ -57,201 +56,154 @@ public class PlayerController : MonoBehaviour {
 		ragemanager.SetWeapon (weapon[actualWeapon].Getname(), weapon[actualWeapon].GetpathSprWeapon(), weapon[actualWeapon].GetidSprWeapon(),ID);
 		BoolAnimatorToDirection ();
 
-		if (Input.GetButton("Fire_P1"))
+		if (InputManager.Fire(ID))
 		{
-			Fire (h_direction,v_direction,1);
+			Fire (h_direction,v_direction);
 		}
-		if (Input.GetButton("Fire_P2"))
+		if (InputManager.Switch(ID))
 		{
-			Fire (h_direction,v_direction,2);
+			Switch();
 		}
-		if (Input.GetButtonDown("Switch_P1"))
-		{
-			Switch(1);
-		}
-		if (Input.GetButtonDown("Switch_P2"))
-		{
-			Switch(2);
-		}
-		if (Input.GetButtonDown("Drop_P1")) {
-			int h = (int) Input.GetAxis ("Horizontal_P1");
-			int v = (int) Input.GetAxis ("Vertical_P1");
-			if (h == 0 && v == 0) {
-				v = -1;
-			}
-			DropWeapon (h,v,1);
-		}
-		if (Input.GetButtonDown("Drop_P2")) {
-			int h = (int) Input.GetAxis ("Horizontal_P2");
-			int v = (int) Input.GetAxis ("Vertical_P2");
-			if (h == 0 && v == 0) {
-				v = -1;
-			}
-			DropWeapon (h,v,2);
+		if (InputManager.Drop(ID)) {
+			DropWeapon (h_direction,v_direction);
 		}
 	}
 
     private void FixedUpdate()
     {
+		EffetRage ();
         BoolAnimatorToDirection();
-        //Valeur entre -1 et 1 selon intentsité de frappe sur l'axe horizontal
-        float h1 = Input.GetAxis("Horizontal_P1");
-		float v1 = Input.GetAxis ("Vertical_P1");
-		float h2 = Input.GetAxis("Horizontal_P2");
-		float v2 = Input.GetAxis ("Vertical_P2");
-        //Fonction responsable du mouvement
 
-
-		if (Input.GetButtonDown ("Dash_P1") && Time.time > nextDash) {
-			IEnumerator coroutine = Dash_Player (h_direction, v_direction, 1, Time.time);
+		if (InputManager.Dash(ID) && Time.time > nextDash) {
+			IEnumerator coroutine = Dash_Player (h_direction, v_direction, Time.time);
 			StartCoroutine (coroutine);
-		} else {
-			MovePlayer (h1, v1, 1);
 		}
-			
-		if (Input.GetButtonDown ("Dash_P2") && Time.time > nextDash) {
-			IEnumerator coroutine = Dash_Player (h_direction, v_direction, 2, Time.time);
-			StartCoroutine (coroutine);
-		} else {
-			MovePlayer (h2, v2, 2);
+
+		if (!dashing) {
+			MovePlayer (InputManager.MoveH(ID), InputManager.MoveV(ID));
 		}
 			
 		if (gettingHit) {
 			rigidBody.AddForce (forceHit, ForceMode.Impulse);
-			EffetRage (ID);
 			gettingHit = false;
 		}
     }
 
-	private void MovePlayer( float h, float v, int player)
+	private void MovePlayer( float h, float v)
 	{
-		if (player == ID) {
-			rigidBody.velocity = new Vector3 (h * maxSpeed, 0, v * maxSpeed);
-			SetBool_H_V (h, v, player);
-			//Si on veut utiliser un miroir avec les sprites il faut ces lignes de code
-			/*if ((h > 0 && facingRight) || (h < 0 && !facingRight)) {
-				Flip (player);
-			}*/
+		rigidBody.velocity = new Vector3 (h * maxSpeed, 0, v * maxSpeed);
+		SetBool_H_V (h, v);
+	}
+
+	IEnumerator Dash_Player (float h, float v, float startTime) {
+		dashing = true;
+		nextDash = Time.time + dashRate;
+		dashTime = dashLength / dashSpeed;
+	
+		while (Time.time < startTime + dashTime) {
+			rigidBody.velocity = new Vector3 (h * dashSpeed, 0, v * dashSpeed);
+			yield return null;
 		} 
+		rigidBody.velocity = new Vector3 (0, 0, 0);
+		dashing = false;
 	}
 
-	IEnumerator Dash_Player (float h, float v, int player, float startTime) {
-		if (ID == player) {
-			nextDash = Time.time + dashRate;
-			dashTime = dashLength / dashSpeed;
-
-			while (Time.time < startTime + dashTime) {
-				rigidBody.velocity = new Vector3 (h * dashSpeed, 0, v * dashSpeed);
-				yield return null;
-			} 
-		}
-	}
-
-    private void PutBool4Directions_False(int player) {
-        if (player == ID) {
-            animator.SetBool("GoUp", false);
-            animator.SetBool("GoDown", false);
-            animator.SetBool("GoLeft", false);
-            animator.SetBool("GoRight", false);
-        }
+    private void PutBool4Directions_False() {
+		animator.SetBool("GoUp", false);
+		animator.SetBool("GoDown", false);
+		animator.SetBool("GoLeft", false);
+		animator.SetBool("GoRight", false);
     }
 
-	private void SetBool_V(float h, float v, int player)
+	private void SetBool_V(float h, float v)
 	{
-		if (player == ID) {
-			if (v > 0) {
-				animator.SetBool ("GoUp", true);
-				animator.SetBool ("GoDown", false);
-                if (h > 0) {
-                    animator.SetBool("GoUpRight", true);
-                    animator.SetBool("GoUpLeft", false);
-                    PutBool4Directions_False(ID);
-                } else if (h < 0) {
-                    animator.SetBool("GoUpLeft", true);
-                    animator.SetBool("GoUpRight", false);
-                    PutBool4Directions_False(ID);
-                } else {
-                    animator.SetBool("GoUpLeft", false);
-                    animator.SetBool("GoUpRight", false);
-                }
-			} else if (v < 0) {
-				animator.SetBool ("GoUp", false);
-				animator.SetBool ("GoDown", true);
-                if (h > 0) {
-                    animator.SetBool("GoDownRight", true);
-                    animator.SetBool("GoDownLeft", false);
-                    PutBool4Directions_False(ID);
-                } else if (h < 0) {
-                    animator.SetBool("GoDownLeft", true);
-                    animator.SetBool("GoDownRight", false);
-                    PutBool4Directions_False(ID);
-                } else {
-                    animator.SetBool("GoDownLeft", false);
-                    animator.SetBool("GoDownRight", false);
-                }
+		if (v > 0) {
+			animator.SetBool ("GoUp", true);
+			animator.SetBool ("GoDown", false);
+            if (h > 0) {
+            	animator.SetBool("GoUpRight", true);
+                animator.SetBool("GoUpLeft", false);
+                PutBool4Directions_False();
+            } else if (h < 0) {
+                animator.SetBool("GoUpLeft", true);
+                animator.SetBool("GoUpRight", false);
+                PutBool4Directions_False();
             } else {
-				animator.SetBool ("GoUp", false);
-                animator.SetBool("GoDown", false);
-                animator.SetBool("GoDownLeft", false);
-                animator.SetBool("GoDownRight", false);
                 animator.SetBool("GoUpLeft", false);
                 animator.SetBool("GoUpRight", false);
             }
-		}
-	}
-
-	private void SetBool_H_V(float h, float v, int player)
-	{
-		if (player == ID) {
-			if (h > 0) {
-				animator.SetBool ("GoLeft", false);
-				animator.SetBool ("GoRight", true);
-				SetBool_V (h, v, ID);
-			} else if (h < 0) {
-				animator.SetBool ("GoLeft", true);
-				animator.SetBool ("GoRight", false);
-				SetBool_V (h, v, ID);
-			} else {
-				animator.SetBool ("GoLeft", false);
-				animator.SetBool ("GoRight", false);
-				SetBool_V (h, v, ID);
-			}
-            if (h == 0 && v == 0) {
-                animator.SetBool("Move", false);
+		} else if (v < 0) {
+			animator.SetBool ("GoUp", false);
+			animator.SetBool ("GoDown", true);
+            if (h > 0) {
+                animator.SetBool("GoDownRight", true);
+                animator.SetBool("GoDownLeft", false);
+                PutBool4Directions_False();
+            } else if (h < 0) {
+                animator.SetBool("GoDownLeft", true);
+                animator.SetBool("GoDownRight", false);
+                PutBool4Directions_False();
             } else {
-                animator.SetBool("Move", true);
+                animator.SetBool("GoDownLeft", false);
+                animator.SetBool("GoDownRight", false);
             }
-		}
-	}
-
-	private void Fire(int h, int v, int player){
-
-		if (player == ID) {
-			if (Time.time > nextFire) {
-				nextFire = Time.time + weapon [actualWeapon].GetfireRate ();
-				Shot clone;
-				clone = GameObject.Instantiate<Shot> (shot, GetComponent<Transform> ().position, Quaternion.identity);
-				clone.Set (weapon [actualWeapon].GetID (),ID, h, v);
-				if (weapon[actualWeapon].Gettype() == "melee")
-				{
-					animator.SetBool("Cac", true);
-				} else if (weapon[actualWeapon].Gettype() == "distance")
-				{
-					animator.SetBool("Fire", true);
-				}
-			}
+         } else {
+			animator.SetBool ("GoUp", false);
+            animator.SetBool("GoDown", false);
+            animator.SetBool("GoDownLeft", false);
+            animator.SetBool("GoDownRight", false);
+            animator.SetBool("GoUpLeft", false);
+            animator.SetBool("GoUpRight", false);
         }
 	}
 
-	private void Switch(int player)
+
+	private void SetBool_H_V(float h, float v)
 	{
-		if (player == ID) {
-			if (actualWeapon == 0) {
-				actualWeapon = 1;
-			} else {
-				actualWeapon = 0;
+		if (h > 0) {
+			animator.SetBool ("GoLeft", false);
+			animator.SetBool ("GoRight", true);
+			SetBool_V (h, v);
+		} else if (h < 0) {
+			animator.SetBool ("GoLeft", true);
+			animator.SetBool ("GoRight", false);
+			SetBool_V (h, v);
+		} else {
+			animator.SetBool ("GoLeft", false);
+			animator.SetBool ("GoRight", false);
+			SetBool_V (h, v);
+		}
+        if (h == 0 && v == 0) {
+            animator.SetBool("Move", false);
+        } else {
+            animator.SetBool("Move", true);
+        }
+	}
+
+	private void Fire(int h, int v){
+		if (Time.time > nextFire) {
+			nextFire = Time.time + weapon [actualWeapon].GetfireRate ();
+			Shot clone;
+			clone = GameObject.Instantiate<Shot> (shot, GetComponent<Transform> ().position, Quaternion.identity);
+			clone.Set (weapon [actualWeapon].GetID (),ID, h, v);
+			if (weapon[actualWeapon].Gettype() == "melee")
+			{
+				animator.SetBool("Cac", true);
+			} else if (weapon[actualWeapon].Gettype() == "distance")
+			{
+				animator.SetBool("Fire", true);
 			}
 		}
+	}
+
+	private void Switch()
+	{
+		if (actualWeapon == 0) {
+			actualWeapon = 1;
+		} else {
+			actualWeapon = 0;
+		}
+
 	}
 
 	public bool GetAvaible() {
@@ -265,38 +217,27 @@ public class PlayerController : MonoBehaviour {
 	public void GetNewWeapon(int ID){
 
 		if (weapon [actualWeapon].GetID() == 0) {
-			weapon [actualWeapon] = dataController.SearchID(ID);
+			weapon [actualWeapon] = DataController.SearchID(ID);
 		} else {
-			weapon[1-actualWeapon] = dataController.SearchID(ID);
+			weapon[1-actualWeapon] = DataController.SearchID(ID);
 		}
 
 	}
 
-	private void DropWeapon(int h, int v, int player)
+	private void DropWeapon(int h, int v)
 	{
-		if (player == ID) {
-			if (weapon [actualWeapon].GetID () != 0) {
-				WeaponGround clone;
-				clone = GameObject.Instantiate<WeaponGround> (weaponGround, GetComponent<Transform> ().position, Quaternion.identity);
-				clone.ID = weapon [actualWeapon].GetID ();
-				clone.SetCreated (h,v);
-
-				weapon [actualWeapon] = dataController.SearchID (0);
-			}
+		if (weapon [actualWeapon].GetID () != 0) {
+			WeaponGround clone;
+			clone = GameObject.Instantiate<WeaponGround> (weaponGround, GetComponent<Transform> ().position, Quaternion.identity);
+			clone.ID = weapon [actualWeapon].GetID ();
+			clone.SetCreated (h,v);
+			weapon [actualWeapon] = DataController.SearchID (0);
 		}
-	}
-
-	private void Flip(int player)
-	{
-		if (player == ID) {
-			sprite.flipX = false;
-			facingRight = !facingRight;
-		} 
 	}
 
 	public void GetHit(Vector3 direction, int IDweapon) {
 		gettingHit = true;
-		forceHit = dataController.SearchID(IDweapon).Getforce() * direction ;
+		forceHit = DataController.SearchID(IDweapon).Getforce() * direction ;
 	}
 
 	public int GetID() {
@@ -340,12 +281,11 @@ public class PlayerController : MonoBehaviour {
 		animator.SetBool("Fire", false);
 	}
 
-	private void EffetRage(int player){
-		float rage = ragemanager.GetRage(player);
-		rage = rage / 100f * 255f;
-		tmp = new Vector4(255f, 255f - rage, 255f - rage, 255f);
-		Debug.Log(tmp);
-		sprite.color = tmp;
+	private void EffetRage(){
+		float rage = ragemanager.GetRage (ID);
+		rage = rage / 100f;
+		colorS = new Vector4 (1f, 1f - rage, 1f - rage, 1f);
+		sprite.color = colorS;
 	}
 		
 }

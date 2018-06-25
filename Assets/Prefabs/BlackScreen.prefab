@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224128764192481648}
   - component: {fileID: 222495633400222380}
   - component: {fileID: 114924659406862968}
-  - component: {fileID: 114441659866608862}
+  - component: {fileID: 114661207431200448}
   m_Layer: 0
   m_Name: BlackScreen
   m_TagString: Untagged
@@ -29,7 +29,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114441659866608862
+--- !u!114 &114661207431200448
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -37,7 +37,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1195637947616588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d95035e0820ee0e42ba76be05ddd3cd9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f9a3dca12791e44aa7e7f4432609648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114924659406862968

@@ -6,7 +6,6 @@ public class Shot : MonoBehaviour {
 
 	public SoundController sound;
 
-	private DataController dataController = new DataController ();
 	private int m_id = 0;
 	private string m_type;
 	private float m_timeCreation;
@@ -17,7 +16,7 @@ public class Shot : MonoBehaviour {
 
 	void Start () {
 		
-		WeaponOnPlayer weapon = dataController.SearchID (m_id);
+		WeaponOnPlayer weapon = DataController.SearchID (m_id);
 		int idSpr = weapon.GetidSprShot ();
 		m_type = weapon.Gettype ();
 		m_timeCreation = Time.time;

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class WeaponGround : MonoBehaviour {
 
-	private DataController dataController = new DataController ();
-
 	public int ID = 0;
 	private bool created = false;
 	private float timer;
@@ -17,7 +15,7 @@ public class WeaponGround : MonoBehaviour {
 
 	void Start () {
 
-		WeaponOnPlayer weapon = dataController.SearchID (ID);
+		WeaponOnPlayer weapon = DataController.SearchID (ID);
 		int idSpr = weapon.GetidSprWeapon ();
 		string pathSpr = weapon.GetpathSprWeapon ();
 		this.gameObject.GetComponent<SpriteRenderer> ().sprite = Resources.LoadAll<Sprite> ( pathSpr)[idSpr];

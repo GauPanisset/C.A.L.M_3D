@@ -5,20 +5,20 @@ using UnityEngine;
 using System.Linq;
 using System.IO;
 
-public class DataController
+static public class DataController
 {
-	private string file = "Assets/Data/Data_arme.json";
-	private string dataWeapon;
-	private WeaponList weaponList = new WeaponList();
+	static private WeaponList weaponList = new WeaponList();
 
-	public DataController() {
+	static public void Read() {
+		string file = "Assets/Data/Data_arme.json";
+		string dataWeapon;
 		using (StreamReader r = new StreamReader (file)) {
 			dataWeapon = r.ReadToEnd();
 		}
 		JsonUtility.FromJsonOverwrite(dataWeapon,weaponList);
 	}
 
-	public WeaponOnPlayer SearchID(int ID){
+	static public WeaponOnPlayer SearchID(int ID){
 		WeaponOnPlayer newWeapon = new WeaponOnPlayer();
 		bool found = false;
 

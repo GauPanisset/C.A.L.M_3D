@@ -23,7 +23,11 @@ public class EndController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetButton("Dash_P1") || Input.GetButton("Dash_P2"))
+		{
+			gameController.RestartGame ();
+		}
+
 	}
 		
 }

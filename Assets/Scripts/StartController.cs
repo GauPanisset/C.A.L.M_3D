@@ -9,13 +9,15 @@ public class StartController : MonoBehaviour {
 	private GameController gameController;
 
 	public Image background;
+	public Button m_start;
 	public Button m_option;
 	public Button m_quit;
 	// Use this for initialization
 	void Start () {
 
 		gameController = GameObject.Find("GameController").GetComponent<GameController>();
-		m_option.onClick.AddListener (() => {gameController.Option ();});
+		m_start.onClick.AddListener (() => {gameController.StartGame ("Punky","Moumoute");});
+		m_option.onClick.AddListener (() => {gameController.Option();});
 		m_quit.onClick.AddListener (() => {gameController.QuitGame();});
 	}
 

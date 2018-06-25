@@ -3,11 +3,11 @@
 	{
 	"m_id": "00",
 	"m_fireRate" : 1,
-	"m_damage" : 105,
+	"m_damage" : 15,
 	"m_name" : "Astropoint",
 	"m_speedprojectile" : 24,
 	"m_force" : 1000,
-	"m_pathSprWeapon" : "Sprite/sprite1",
+	"m_pathSprWeapon" : "Sprite/Burning_fist_infoboxD",
 	"m_idSprWeapon" : 0,
 	"m_pathSprShot" : "Sprite/sprite3",
 	"m_idSprShot" : 0,
@@ -26,8 +26,8 @@
 	"m_idSprWeapon" : 0,
 	"m_pathSprShot" : "Sprite/sprite3",
 	"m_idSprShot" : 3,
-	"m_pathSndEx" : "Sound/explosion1",
-	"m_pathSndSht" : "Sound/flingue1",
+	"m_pathSndEx" : "Sound/JetPiece",
+	"m_pathSndSht" : "Sound/Jet",
 	"m_type" : "distance"
       	},
 

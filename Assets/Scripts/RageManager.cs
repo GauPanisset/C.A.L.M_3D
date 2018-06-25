@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class RageManager : MonoBehaviour
 {
+	public ScreenController Blackscreen;
     public Image rage_1;
     public Image rage_2;
 	public Text rageValue_1;
@@ -19,7 +20,6 @@ public class RageManager : MonoBehaviour
     private float taux_rage_2;
     private float maxrage = 100f;
 	private float rageDecay = 0.01f;
-	private DataController dataController = new DataController ();
 	private GameController gameController;
 
     // Use this for initialization
@@ -68,7 +68,7 @@ public class RageManager : MonoBehaviour
 	}
 
 	public void AddRage(int id,int damageSource) {
-		float rage = dataController.SearchID(id).Getdamage();
+		float rage = DataController.SearchID(id).Getdamage();
 		if (damageSource == 1)
         {
             taux_rage_2 += rage;
@@ -87,10 +87,14 @@ public class RageManager : MonoBehaviour
 	public void SetWeapon(string name, string pathSpr, int idSpr, int id) {
 		if (id == 1) {
 			nameWeapon_P1.text = name;
-			imageWeapon_P1.sprite = Resources.LoadAll<Sprite> ( pathSpr)[idSpr];
+			if (pathSpr != null) {
+				imageWeapon_P1.sprite = Resources.LoadAll<Sprite> (pathSpr) [idSpr];
+			}
 		} else {
 			nameWeapon_P2.text = name;
-			imageWeapon_P2.sprite = Resources.LoadAll<Sprite> ( pathSpr)[idSpr];
+			if (pathSpr != null) {
+				imageWeapon_P2.sprite = Resources.LoadAll<Sprite> (pathSpr) [idSpr];
+			}
 		}
 	}
 
@@ -101,6 +105,11 @@ public class RageManager : MonoBehaviour
 		else {
 			return taux_rage_2;
 		}
+	}
+
+	public void Sceen() {
+
+		ScreenController clone = GameObject.Instantiate<ScreenController> (Blackscreen, GetComponent<Transform> ().position, Quaternion.identity);
 	}
 
 }

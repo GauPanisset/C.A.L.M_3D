@@ -7,10 +7,10 @@ public class ScreenController : MonoBehaviour {
 
 	private Image BlackScreen;
 
-	void OnEnable () {
+	void Awake () {
 		BlackScreen = GetComponentInChildren<Image> ();
 		float startTime = Time.time;
-		IEnumerator coroutine = Fondu_screen (BlackScreen, 0.3f, startTime);
+		IEnumerator coroutine = Fondu_screen (BlackScreen, 2f, startTime);
 		StartCoroutine (coroutine);
 	}
 
